@@ -1,11 +1,11 @@
-class Play extends Phaser.Scene {
+class Puzzle1 extends Phaser.Scene {
     constructor() {
-        super("playScene");
+        super("puzScene1");
     }
 
     preload() {
         // load images/sprites
-        this.load.image('main_room', 'assets/img/main_hub.png');
+        this.load.image('main_room', 'assets/img/puzzle_room1.png');
         this.load.image('p1', 'assets/img/toad.jpg');
     }
 

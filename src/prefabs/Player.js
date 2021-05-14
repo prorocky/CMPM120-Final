@@ -6,7 +6,7 @@ class Player extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
 
         // speed player moves at
-        this.moveSpeed = 2;
+        this.moveSpeed = 3;
         
 
         // add player sfx
