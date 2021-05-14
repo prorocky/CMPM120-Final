@@ -6,6 +6,7 @@ class Play extends Phaser.Scene {
     preload() {
         // load images/sprites
         this.load.image('main_room', 'assets/img/main_hub.png');
+        this.load.image('p1', 'assets/img/toad.jpg');
     }
 
     create() {
@@ -24,8 +25,12 @@ class Play extends Phaser.Scene {
             this,
             game.config.width / 2,
             game.config.height / 2,
-            'pic.png',
+            'p1',
             0
-        ).setOrigin(0, 0);
+        ).setOrigin(0.5, 0.5);
+    }
+
+    update() {
+        this.shroom.update();
     }
 }
