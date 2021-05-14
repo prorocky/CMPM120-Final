@@ -11,5 +11,21 @@ class Play extends Phaser.Scene {
     create() {
         // background for room
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room').setOrigin(0, 0);
+
+        // keyboard keys
+        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+        // create player
+        this.shroom = new Player(
+            this,
+            game.config.width / 2,
+            game.config.height / 2,
+            'pic.png',
+            0
+        ).setOrigin(0, 0);
     }
 }
