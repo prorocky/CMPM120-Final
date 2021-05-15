@@ -7,6 +7,7 @@ class Play extends Phaser.Scene {
         // load images/sprites
         this.load.image('main_room', 'assets/img/main_hub.png');
         this.load.image('p1', 'assets/img/toad.jpg');
+        this.load.image('door', 'assets/img/Door.png');
 
         // load audio
         this.load.audio('temp', 'assets/aud/LoseCondition1.wav');
@@ -30,11 +31,14 @@ class Play extends Phaser.Scene {
         // create player
         this.shroom = new Player(
             this,
-            game.config.width / 2,
+            game.config.width / 2,d
             game.config.height / 2,
             'p1',
             0
         ).setOrigin(0.5, 0.5);
+
+        // door
+        this.rightDoor = this.add.image(game.config.width - 100, game.config.height / 2, 'door');
     }
 
     update() {
