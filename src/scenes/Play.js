@@ -36,5 +36,10 @@ class Play extends Phaser.Scene {
 
     update() {
         this.shroom.update();
+        
+        if ((this.shroom.x > 950) && (this.shroom.x < 970) && (this.shroom.y <= 550) && (this.shroom.y >= 530)) {
+            // console.log("FUCK ME IN THE ASS DADDY");
+            this.scene.start('puzScene1');
+        }
     }
 }

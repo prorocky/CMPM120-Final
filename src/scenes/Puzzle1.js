@@ -5,13 +5,13 @@ class Puzzle1 extends Phaser.Scene {
 
     preload() {
         // load images/sprites
-        this.load.image('main_room', 'assets/img/puzzle_room1.png');
+        this.load.image('main_room1', 'assets/img/puzzle_room1.png');
         this.load.image('p1', 'assets/img/toad.jpg');
     }
 
     create() {
         // background for room
-        this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room').setOrigin(0, 0);
+        this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room1').setOrigin(0, 0);
 
         // keyboard keys
         // movement
@@ -27,7 +27,7 @@ class Puzzle1 extends Phaser.Scene {
         // create player
         this.shroom = new Player(
             this,
-            game.config.width / 2,
+            0,
             game.config.height / 2,
             'p1',
             0
