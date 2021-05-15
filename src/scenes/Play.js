@@ -7,6 +7,9 @@ class Play extends Phaser.Scene {
         // load images/sprites
         this.load.image('main_room', 'assets/img/main_hub.png');
         this.load.image('p1', 'assets/img/toad.jpg');
+
+        // load audio
+        this.load.audio('temp', 'assets/aud/LoseCondition1.wav');
     }
 
     create() {
@@ -36,9 +39,10 @@ class Play extends Phaser.Scene {
 
     update() {
         this.shroom.update();
-        
+
+        // move to new room if you move to the right (there will be a door)
         if ((this.shroom.x > 950) && (this.shroom.x < 970) && (this.shroom.y <= 550) && (this.shroom.y >= 530)) {
-            // console.log("FUCK ME IN THE ASS DADDY");
+            this.sound.play('temp');
             this.scene.start('puzScene1');
         }
     }
