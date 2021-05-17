@@ -31,7 +31,7 @@ class Play extends Phaser.Scene {
         // create player
         this.shroom = new Player(
             this,
-            game.config.width / 2,d
+            game.config.width / 2,
             game.config.height / 2,
             'p1',
             0
