@@ -59,7 +59,7 @@ class Play extends Phaser.Scene {
         this.door = this.physics.add.sprite(config.width - 100, config.height / 2, 'door');
         let door =this.add.existing(this.door);
        
-        // door.body.setCollideWorldBounds = true;
+        door.body.setCollideWorldBounds = true;
         // player.body.onCollide = new this.Phaser.Signal();
         // player.body.onCollide.add(hitDoor1, this);
 
