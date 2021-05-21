@@ -2,8 +2,19 @@ let config = {
     type: Phaser.CANVAS,
     width: 1080,
     height: 1080,
-    scene: [Play, Puzzle1],
+    physics: {
+        default:"arcade",
+        arcade: {
+            gravity: { y: 0 },
+            debug: true
+        }
+    },
+    scene: Play
 }
+
+let player; 
+let door;
+
 // game variable
 let game = new Phaser.Game(config);
 
