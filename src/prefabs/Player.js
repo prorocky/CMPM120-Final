@@ -14,6 +14,9 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     update() {
+
+
+
         if (keyW.isDown) {
             this.y -= this.moveSpeed;
         }
@@ -26,6 +29,7 @@ class Player extends Phaser.GameObjects.Sprite {
         if (keyD.isDown) {
             this.x += this.moveSpeed;
         }
+        
 
         this.x = Phaser.Math.Clamp(this.x, this.width / 2, game.config.width - this.width / 2);
         this.y = Phaser.Math.Clamp(this.y, this.height / 2, game.config.height - this.height / 2);
