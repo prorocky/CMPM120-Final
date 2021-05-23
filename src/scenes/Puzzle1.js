@@ -5,7 +5,7 @@ class Puzzle1 extends Phaser.Scene {
 
     preload() {
         // load images/sprites
-        this.load.image('main_room1', 'assets/img/puzzle_room1.png');
+        this.load.image('main_room1', 'assets/img/puzzle_room2.png');
         this.load.image('p1', 'assets/img/toad.jpg');
     }
 
