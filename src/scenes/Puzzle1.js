@@ -38,6 +38,9 @@ class Puzzle1 extends Phaser.Scene {
 
         // inventory
         keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
+
+        // space bar
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         
         //creating player
         player = this.physics.add.sprite(200, config.height - 500, "p1");
@@ -150,13 +153,13 @@ class Puzzle1 extends Phaser.Scene {
         }
         this.itemArr.forEach(element => {
             if (this.physics.overlap(player, element)) {
-                this.input.keyboard.once('keydown-SPACE', () => {
+                if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
                     if (!this.colliding) {
                         this.detectCollision(element);
                         this.colliding = true;
                     }
-                });
-            } else if (this.colliding) {
+                }
+            } else {
                 this.colliding = false;
             }
         });
@@ -177,7 +180,7 @@ class Puzzle1 extends Phaser.Scene {
         if (!this.started) {
             this.started = true;
         }
-        this.sound.play('riddle');
+        // this.sound.play('riddle');
         this.time.delayedCall(7500, () => {
             this.playing = false;
         }, null, this);
