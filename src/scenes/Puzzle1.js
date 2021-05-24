@@ -20,7 +20,7 @@ class Puzzle1 extends Phaser.Scene {
         keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
         
         //creating player
-        player = this.physics.add.sprite(200, config.height -500, "p1");
+        player = this.physics.add.sprite(200, config.height - 500, "p1");
 
         // fade into scene
         this.cameras.main.fadeIn(1000, 0, 0, 0);
@@ -105,7 +105,6 @@ class Puzzle1 extends Phaser.Scene {
             })
         }
     }
-    
     //starts puzzle scene when objects collide 
     hitDoor1 (door, player){
         this.scene.start('playScene');
