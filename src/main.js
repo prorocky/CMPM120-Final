@@ -1,3 +1,4 @@
+
 let config = {
     type: Phaser.CANVAS,
     width: 1080,
@@ -10,7 +11,7 @@ let config = {
             debug: true
         }
     },
-    scene: [Play, Puzzle1, Puzzle2]
+    scene: [Play, Puzzle1, Inventory, Puzzle2]
 }
 
 let player; 
