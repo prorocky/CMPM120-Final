@@ -187,7 +187,7 @@ class Puzzle1 extends Phaser.Scene {
     }
 
     detectCollision(item) {
-        console.log(item.texture.key);
+        // console.log(item.texture.key);
         if (this.door2.alpha == 0) {
             if (item == this.skull) {
                 this.started = true;

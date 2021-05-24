@@ -31,8 +31,8 @@ class Play extends Phaser.Scene {
         this.cameras.main.fadeIn(1000, 0, 0, 0);
 
         // music
-        // this.song = this.sound.add('music', {volume: 0.5, loop: true});
-        // this.song.play();
+        this.song = this.sound.add('music', {volume: 0.5, loop: true});
+        this.song.play();
         // commented for now cuz I listen to music when I work :3 -Oran
 
         /*creating animations/linking them with movement 
