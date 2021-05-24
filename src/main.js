@@ -3,6 +3,7 @@ let config = {
     type: Phaser.CANVAS,
     width: 1080,
     height: 1080,
+    autoCenter: true,
     physics: {
         default:"arcade",
         arcade: {
@@ -10,7 +11,7 @@ let config = {
             debug: true
         }
     },
-    scene: [Play, Puzzle1, Inventory]
+    scene: [Play, Puzzle1, Inventory, Puzzle2]
 }
 
 let player; 
