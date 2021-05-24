@@ -1,12 +1,13 @@
-class Inventory extends Phaser.Scene{
+class InventoryScene extends Phaser.Scene{
     constructor(){
         super("inventoryScene");
-        this.maxColumns = 5;
-        this.rows = 1;
+        this.maxColumns = 2;
+        this.maxRows = 3;
+        this.rows = 3;
         this.uiScale = 1.5;
-        this.gridSpacing = 4;
-        this.margin = 8; 
-        this._tileSize = 32;
+        this.gridSpacing = 150;
+        this.margin = 75; 
+        this._tileSize = 1;
         this.inventorySlots = [];
     }
 
@@ -27,15 +28,18 @@ class Inventory extends Phaser.Scene{
     get tileSize(){
         return this._tileSize * this.uiScale;
     }
-
+ 
     refresh() {
-
+        for(let index = 0; index < this.maxColumns * this.rows; index++){
+            let x  = this.margin + this.tileSize / 2 + (index * (this.tileSize + this.gridSpacing));
+            let y =  this.margin + this.tileSize * 600;
+            let inventorySlot = this.add.sprite(x, y, "inventorySlot");
+            inventorySlot.setScale(this.uiScale);
+        }
     }
 
     create(){
-        let inventorySlot = this.add.sprite(90,90, "inventorySlot");
-
-        
+        this.refresh();
 
     }
 
