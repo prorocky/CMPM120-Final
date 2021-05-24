@@ -92,6 +92,6 @@ class Puzzle2 extends Phaser.Scene {
     }
     //starts puzzle scene when objects collide 
     hitDoor1 (door, player){
-        this.scene.start('playScene');
+        this.scene.start('puzScene1');
     }
 }

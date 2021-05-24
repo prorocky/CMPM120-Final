@@ -13,7 +13,7 @@ class Play extends Phaser.Scene {
             frameWidth: 121, frameHeight: 143
         });
         // load audio
-        this.load.audio('music', 'assets/aud/main_audio.wav');
+        this.load.audio('music', 'assets/aud/MainBackground.wav');
         this.load.audio('greeting', 'assets/aud/WhoDoWeHave.wav');
     }
 
