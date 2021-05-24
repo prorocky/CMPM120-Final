@@ -102,7 +102,7 @@ class Play extends Phaser.Scene {
     //starts puzzle scene when objects collide 
     hitDoor1 (door,player){
         // play greeting
-        // this.sound.play('greeting');
+        this.sound.play('greeting');
         this.scene.start('puzScene1');
     }
 }

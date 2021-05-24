@@ -180,7 +180,7 @@ class Puzzle1 extends Phaser.Scene {
         if (!this.started) {
             this.started = true;
         }
-        // this.sound.play('riddle');
+        this.sound.play('riddle');
         this.time.delayedCall(7500, () => {
             this.playing = false;
         }, null, this);
