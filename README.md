@@ -2,7 +2,7 @@
 final for cmpm120, puzzle/maze game
 
 # Artists
-Makkenzie: props
+Makkenzie: props\n
 Gabriella: character design
 
 # Programmers
