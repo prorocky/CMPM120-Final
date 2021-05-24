@@ -11,7 +11,7 @@ let config = {
             debug: true
         }
     },
-    scene: [Play, Puzzle1, Inventory, Puzzle2]
+    scene: [Play, Puzzle1, InventoryScene, Puzzle2]
 }
 
 let player; 
