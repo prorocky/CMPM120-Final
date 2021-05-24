@@ -31,7 +31,7 @@ class Puzzle1 extends Phaser.Scene {
 
         // play riddle once
         this.time.delayedCall(8000, () => {
-            if (this.playing == false) {
+            if (this.playing == false && this.started == false) {
                 this.playRiddle();
             }
         }, null, this);
@@ -150,7 +150,6 @@ class Puzzle1 extends Phaser.Scene {
         }
         this.itemArr.forEach(element => {
             if (this.physics.overlap(player, element)) {
-                console.log("overlapping");
                 this.input.keyboard.once('keydown-SPACE', () => {
                     if (!this.colliding) {
                         this.detectCollision(element);
@@ -185,8 +184,10 @@ class Puzzle1 extends Phaser.Scene {
     }
 
     detectCollision(item) {
+        console.log(item.texture.key);
         if (this.door2.alpha == 0) {
             if (item == this.skull) {
+                this.started = true;
                 this.door2.alpha = 1;
                 this.sound.play('correct');
             } else {

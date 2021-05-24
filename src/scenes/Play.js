@@ -5,7 +5,7 @@ class Play extends Phaser.Scene {
     
     preload() {
         // load images/sprites
-        this.load.image('main_room', 'assets/img/puzzle_room1.png');
+        this.load.image('main_room', 'assets/img/main_hub.png');
         this.load.image('door', 'assets/img/Door01.png');
 
         this.load.spritesheet('p1', 'assets/img/mushsprite.png',
