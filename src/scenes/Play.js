@@ -14,7 +14,7 @@ class Play extends Phaser.Scene {
         });
         // load audio
         this.load.audio('music', 'assets/aud/main_audio.wav');
-        this.load.audio('temp', 'assets/aud/LoseCondition1.wav');
+        this.load.audio('greeting', 'assets/aud/WhoDoWeHave.wav');
     }
 
     create() {
@@ -99,6 +99,8 @@ class Play extends Phaser.Scene {
 
     //starts puzzle scene when objects collide 
     hitDoor1 (door,player){
+        // play greeting
+        this.sound.play('greeting');
         this.scene.start('puzScene1');
     }
 }
@@ -108,10 +110,18 @@ class Play extends Phaser.Scene {
  * Proposed changes:
  * 
  * Add sound effect for changing rooms (maybe going up/down stairs, add to "tower" theme)
+ * 
  * Change greeting audio to say "find the riddle" instead of "answer this riddle"
+ * 
  * Add instructions "arrow keys to move, SPACE to interact" to a main menu screen
  *          -> add a main menu scene with some new art? image of tower?
  * 
+ * Do we want there to be some pressure for escaping i.e. max number of mistakes before losing? time limit?
+ *          -> for now, items are scattered, play lose audio for wrong item, win audio for correct item, door appears
+ *                  -> add animation for "damage" (toggle alpha 0/1)
+ *          -> change to scene.pause() scene.resume() so they don't have to do the puzzle over and over
+ * 
+ * Riddle 1 says "white and empty" but the skull is purple, clarity issue?
  * 
  */
 

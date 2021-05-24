@@ -10,7 +10,7 @@ let config = {
             debug: true
         }
     },
-    scene: [Play, Puzzle1]
+    scene: [Play, Puzzle1, Puzzle2]
 }
 
 let player; 
