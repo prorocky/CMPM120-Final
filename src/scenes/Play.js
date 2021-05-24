@@ -5,7 +5,7 @@ class Play extends Phaser.Scene {
     
     preload() {
         // load images/sprites
-        this.load.image('main_room', 'assets/img/puzzle_room1.png');
+        this.load.image('main_room', 'assets/img/main_hub.png');
         this.load.image('door', 'assets/img/Door01.png');
 
         this.load.spritesheet('p1', 'assets/img/mushsprite.png',
@@ -13,7 +13,7 @@ class Play extends Phaser.Scene {
             frameWidth: 121, frameHeight: 143
         });
         // load audio
-        this.load.audio('music', 'assets/aud/main_audio.wav');
+        this.load.audio('music', 'assets/aud/MainBackground.wav');
         this.load.audio('greeting', 'assets/aud/WhoDoWeHave.wav');
     }
 

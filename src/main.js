@@ -15,7 +15,6 @@ let config = {
 }
 
 let player; 
-let door;
 
 // game variable
 let game = new Phaser.Game(config);
