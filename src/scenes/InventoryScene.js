@@ -44,5 +44,4 @@ class InventoryScene extends Phaser.Scene{
     }
 
 
-
 }
