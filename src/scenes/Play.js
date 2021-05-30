@@ -43,8 +43,7 @@ class Play extends Phaser.Scene {
         });
         this.anims.create({
             key:"down",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
-            
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})           
         });
         this.anims.create({
             key:"right",
@@ -73,6 +72,21 @@ class Play extends Phaser.Scene {
 
         this.scene.launch('inventoryScene');
 
+        let controlsConfig = {
+            fontFamily: 'Midnight Minutes',
+            fontSize: '50px',
+            //backgroundColor: '#F3B141',
+            color: '#FFFFFF',
+            align: 'right',
+            padding: {
+              top: 5,
+              bottom: 5,
+            },
+          
+          }
+          this.controls = this.add.text(300, 800, 'Use the Arrow Keys to move', controlsConfig);
+
+        
     }
 
     update() {
@@ -115,6 +129,7 @@ class Play extends Phaser.Scene {
  * 
  * Add instructions "arrow keys to move, SPACE to interact" to a main menu screen
  *          -> add a main menu scene with some new art? image of tower?
+ *          -> fading in text? for the creepy vibes
  * 
  * Do we want there to be some pressure for escaping i.e. max number of mistakes before losing? time limit?
  *          -> for now, items are scattered, play lose audio for wrong item, win audio for correct item, door appears
