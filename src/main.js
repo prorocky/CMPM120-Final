@@ -8,7 +8,7 @@ let config = {
         default:"arcade",
         arcade: {
             gravity: { y: 0 },
-            debug: false
+            debug: true
         }
     },
     scene: [Play, Puzzle1, Puzzle2, InventoryScene]

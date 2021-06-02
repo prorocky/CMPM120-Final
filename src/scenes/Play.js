@@ -38,19 +38,19 @@ class Play extends Phaser.Scene {
         so that its a different animation depending on what direction its going in */
         this.anims.create({
             key:"left",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
         this.anims.create({
             key:"down",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})           
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})           
         });
         this.anims.create({
             key:"right",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
         this.anims.create({
             key:"up",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
 
         // making sure player doesn't go off bounds
@@ -125,10 +125,12 @@ class Play extends Phaser.Scene {
 
     //starts puzzle scene when objects collide 
     hitDoor1 (){
-        player.x = 100;
-        player.setVelocity(0, 0);
-        this.scene.stop();
-        this.scene.run('puzScene1');
+        // player.x = 100;
+        // player.setVelocity(0, 0);
+        // this.scene.sleep() causes weird issue
+        // try changing to .stop()?
+        // this.scene.sleep();
+        this.scene.start('puzScene1');
     }
 }
 

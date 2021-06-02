@@ -33,9 +33,6 @@ class Puzzle2 extends Phaser.Scene {
 
         // inventory
         keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
-        
-        //creating player
-        player = this.physics.add.sprite(200, config.height - 500, "p1");
 
         // fade into scene
         this.cameras.main.fadeIn(1000, 0, 0, 0);
@@ -60,14 +57,7 @@ class Puzzle2 extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
         });
 
-        //making sure player doesn't go off bounds
-        player.setCollideWorldBounds(true);
-
-        //creates keyboard input values
-        this.cursors = this.input.keyboard.createCursorKeys();
-
-        this.door = this.physics.add.sprite(config.width - config.width, config.height / 2, 'door');
-
+        // create potion items
         this.pot1 = this.physics.add.sprite(240, 320, 'pot_one');
         this.pot2 = this.physics.add.sprite(60, 280, 'pot_two');
         this.pot3 = this.physics.add.sprite(480, 300, 'pot_three');
@@ -82,9 +72,20 @@ class Puzzle2 extends Phaser.Scene {
         this.pot12 = this.physics.add.sprite(150, 990, 'pot_twelve');
         this.pot13 = this.physics.add.sprite(75, 780, 'pot_thirteen');
 
+
+        //creating player
+        player = this.physics.add.sprite(200, config.height - 500, "p1");
+
+        //making sure player doesn't go off bounds
+        player.setCollideWorldBounds(true);
+
+        //creates keyboard input values
+        this.cursors = this.input.keyboard.createCursorKeys();
+
+        // change this to be invisibile door at exit
+        this.door = this.physics.add.sprite(config.width - config.width, config.height / 2, 'door'); 
         
-        
-        let door =this.add.existing(this.door);
+        let door = this.add.existing(this.door);
        
         door.body.setCollideWorldBounds = true;
         
@@ -122,7 +123,7 @@ class Puzzle2 extends Phaser.Scene {
 
     }
     //starts puzzle scene when objects collide 
-    hitDoor1 (door, player){
+    hitDoor3() {
         this.scene.run('puzScene1');
     }
 }
