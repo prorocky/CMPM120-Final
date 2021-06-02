@@ -10,11 +10,10 @@ class Play extends Phaser.Scene {
 
         this.load.spritesheet('p1', 'assets/img/mushsprite.png',
         {
-            frameWidth: 121, frameHeight: 143
+            frameWidth: 125, frameHeight: 170
         });
         // load audio
         this.load.audio('music', 'assets/aud/MainBackground.wav');
-        this.load.audio('greeting', 'assets/aud/WhoDoWeHave.wav');
     }
 
     create() {
@@ -32,7 +31,7 @@ class Play extends Phaser.Scene {
 
         // music
         this.song = this.sound.add('music', {volume: 0.5, loop: true});
-        this.song.play();
+        // this.song.play();
         // commented for now cuz I listen to music when I work :3 -Oran
 
         /*creating animations/linking them with movement 
@@ -86,10 +85,14 @@ class Play extends Phaser.Scene {
           }
           this.controls = this.add.text(300, 800, 'Use the Arrow Keys to move', controlsConfig);
 
+        // temporary to see coords of player
+        this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
+
         
     }
 
     update() {
+        // this.coord.text = 'X: ' + Math.floor(player.x) + ' Y: ' + Math.floor(player.y);
         player.setVelocity(0,0);
         if (this.cursors.left.isDown) {
             // Move to the left
@@ -110,14 +113,22 @@ class Play extends Phaser.Scene {
             player.setVelocityY(500);
             player.anims.play("down");
         }
+
+        if (this.physics.overlap(player, this.door)) {
+            console.log('true');
+            inDoor = true;
+        } else {
+            inDoor = false;
+        }
         
     }
 
     //starts puzzle scene when objects collide 
-    hitDoor1 (door,player){
-        // play greeting
-        this.sound.play('greeting');
-        this.scene.start('puzScene1');
+    hitDoor1 (){
+        player.x = 100;
+        player.setVelocity(0, 0);
+        this.scene.stop();
+        this.scene.run('puzScene1');
     }
 }
 
@@ -135,6 +146,15 @@ class Play extends Phaser.Scene {
  *          -> for now, items are scattered, play lose audio for wrong item, win audio for correct item, door appears
  *                  -> add animation for "damage" (toggle alpha 0/1)
  *          -> change to scene.pause() scene.resume() so they don't have to do the puzzle over and over
+ * 
+ * 
+ * New Possible Changes:
+ * 
+ * Have a "completed riddle" version of each room so we can easily move back and forward between them without complications, we can just use scene.start
+ *          -> OR figure out how to smoothly implement scene.sleep, etc.
+ * 
+ * 
+ * 
  * 
  */
 

@@ -6,6 +6,22 @@ class Puzzle2 extends Phaser.Scene {
     preload() {
         // load images/sprites
         this.load.image('main_room2', 'assets/img/puzzle_room2.png');
+        this.load.image('door', 'assets/img/Door01.png');
+
+        this.load.image('pot_one', 'assets/img/Potion_one.png');
+        this.load.image('pot_two', 'assets/img/Potion_two.png');
+        this.load.image('pot_three', 'assets/img/Potion_three.png');
+        this.load.image('pot_four', 'assets/img/Potion_four.png');
+        this.load.image('pot_five', 'assets/img/Potion_five.png');
+        this.load.image('pot_six', 'assets/img/Potion_six.png');
+        this.load.image('pot_seven', 'assets/img/Potion_seven.png');
+        this.load.image('pot_eight', 'assets/img/Potion_eight.png');
+        this.load.image('pot_nine', 'assets/img/Potion_nine.png');
+        this.load.image('pot_ten', 'assets/img/Potion_ten.png');
+        this.load.image('pot_eleven', 'assets/img/Potion_eleven.png');
+        this.load.image('pot_twelve', 'assets/img/Potion_twelve.png');
+        this.load.image('pot_thirteen', 'assets/img/Potion_thirteen.png');
+
 
         // load audio
         // this.load.audio('riddle', 'assets/aud/Riddle_Scene2.wav');
@@ -51,6 +67,21 @@ class Puzzle2 extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.door = this.physics.add.sprite(config.width - config.width, config.height / 2, 'door');
+
+        this.pot1 = this.physics.add.sprite(240, 320, 'pot_one');
+        this.pot2 = this.physics.add.sprite(60, 280, 'pot_two');
+        this.pot3 = this.physics.add.sprite(480, 300, 'pot_three');
+        this.pot4 = this.physics.add.sprite(620, 300, 'pot_four');
+        this.pot5 = this.physics.add.sprite(900, 300, 'pot_five');
+        this.pot6 = this.physics.add.sprite(1010, 520, 'pot_six');
+        this.pot7 = this.physics.add.sprite(1010, 750, 'pot_seven');
+        this.pot8 = this.physics.add.sprite(1010, 990, 'pot_eight');
+        this.pot9 = this.physics.add.sprite(850, 990, 'pot_nine');
+        this.pot10 = this.physics.add.sprite(600, 990, 'pot_ten');
+        this.pot11 = this.physics.add.sprite(400, 990, 'pot_eleven');
+        this.pot12 = this.physics.add.sprite(150, 990, 'pot_twelve');
+        this.pot13 = this.physics.add.sprite(75, 780, 'pot_thirteen');
+
         
         
         let door =this.add.existing(this.door);
@@ -92,6 +123,6 @@ class Puzzle2 extends Phaser.Scene {
     }
     //starts puzzle scene when objects collide 
     hitDoor1 (door, player){
-        this.scene.start('puzScene1');
+        this.scene.run('puzScene1');
     }
 }

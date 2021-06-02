@@ -9,7 +9,6 @@ class Puzzle1 extends Phaser.Scene {
             // sprites for riddle objects
         this.load.image('gem', 'assets/img/Gems_Prop.png');
         this.load.image('cards', 'assets/img/Cards.png');
-        this.load.image('ghost', 'assets/img/Ghost_CandleLight_Prop.png');
         this.load.image('hat', 'assets/img/Hat_Prop.png');
         this.load.image('jars', 'assets/img/Jars.png');
         this.load.image('skull', 'assets/img/Skull.png');
@@ -23,11 +22,15 @@ class Puzzle1 extends Phaser.Scene {
         this.load.audio('riddle', 'assets/aud/Riddle_Scene1.wav');
         this.load.audio('correct', 'assets/aud/WinCondition.wav');
         this.load.audio('wrong', 'assets/aud/LoseCondition.wav');
+        this.load.audio('greeting', 'assets/aud/WhoDoWeHave.wav');
     }
 
     create() {
         // background for room
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room1').setOrigin(0, 0);
+
+        // play greeting
+        // this.sound.play('greeting');
 
         // play riddle once
         this.time.delayedCall(8000, () => {
@@ -49,7 +52,6 @@ class Puzzle1 extends Phaser.Scene {
         this.cameras.main.fadeIn(1000, 0, 0, 0);
 
         // add props/items to the room
-        this.ghost = this.physics.add.sprite(775, 250, 'ghost');
         this.gem = this.physics.add.sprite(1010, 540, 'gem');
         this.cards = this.physics.add.sprite(250, 975, 'cards');
         this.hat = this.physics.add.sprite(350, 275, 'hat');
@@ -59,7 +61,7 @@ class Puzzle1 extends Phaser.Scene {
         this.doll2 = this.physics.add.sprite(900, 975, 'voodoo2');
         this.arm = this.physics.add.sprite(550, 975, 'arm');
 
-        this.itemArr = [this.ghost, this.gem, this.cards, this.hat, this.jars, this.skull, this.doll1, this.doll2, this.arm];
+        this.itemArr = [this.gem, this.cards, this.hat, this.jars, this.skull, this.doll1, this.doll2, this.arm];
 
 
         // flag for starting riddle
@@ -109,13 +111,13 @@ class Puzzle1 extends Phaser.Scene {
         door.body.setCollideWorldBounds = true;
         
         //creating collsion detector
-        this.physics.add.overlap(player, door, this.hitDoor1, null, this);
+        this.physics.add.overlap(player, door, this.hitDoor2, null, this);
 
         // temporary to see coords of player
         this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
 
         // go to next puzzle if door is visible
-        this.physics.add.overlap(player, door2, this.hitDoor2, null, this);
+        this.physics.add.overlap(player, door2, this.hitDoor3, null, this);
     }
 
     update() {
@@ -165,11 +167,12 @@ class Puzzle1 extends Phaser.Scene {
         });
     }
     //starts puzzle scene when objects collide 
-    hitDoor1(door, player) {
-        this.scene.start('playScene');
+    hitDoor2() {
+        this.scene.sleep();
+        this.scene.wake('playScene');
     }
 
-    hitDoor2() {
+    hitDoor3() {
         if (this.door2.alpha == 1) {
             this.scene.start('puzScene2');
         }

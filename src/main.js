@@ -8,13 +8,13 @@ let config = {
         default:"arcade",
         arcade: {
             gravity: { y: 0 },
-            debug: true
+            debug: false
         }
     },
-    scene: [Play, Puzzle1, InventoryScene, Puzzle2]
+    scene: [Play, Puzzle1, Puzzle2, InventoryScene]
 }
 
-let player; 
+let player, inDoor = false; 
 
 // game variable
 let game = new Phaser.Game(config);
