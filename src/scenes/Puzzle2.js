@@ -24,7 +24,9 @@ class Puzzle2 extends Phaser.Scene {
 
 
         // load audio
-        // this.load.audio('riddle', 'assets/aud/Riddle_Scene2.wav');
+        this.load.audio('riddle', 'assets/aud/Riddle_Scene2.wav');
+        this.load.audio('correct', 'assets/aud/WinCondition.wav');
+        this.load.audio('wrong', 'assets/aud/LoseCondition.wav');
     }
 
     create() {
@@ -33,6 +35,9 @@ class Puzzle2 extends Phaser.Scene {
 
         // inventory
         keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
+
+        // space bar
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         // fade into scene
         this.cameras.main.fadeIn(1000, 0, 0, 0);
@@ -67,10 +72,12 @@ class Puzzle2 extends Phaser.Scene {
         this.pot7 = this.physics.add.sprite(1010, 750, 'pot_seven');
         this.pot8 = this.physics.add.sprite(1010, 990, 'pot_eight');
         this.pot9 = this.physics.add.sprite(850, 990, 'pot_nine');
-        this.pot10 = this.physics.add.sprite(600, 990, 'pot_ten');
+        this.pot10 = this.physics.add.sprite(75, 560, 'pot_ten');
         this.pot11 = this.physics.add.sprite(400, 990, 'pot_eleven');
         this.pot12 = this.physics.add.sprite(150, 990, 'pot_twelve');
         this.pot13 = this.physics.add.sprite(75, 780, 'pot_thirteen');
+
+        this.potArray = [this.pot1, this.pot2, this.pot3, this.pot4, this.pot5, this.pot6, this.pot7, this.pot8, this.pot9, this.pot10, this.pot11, this.pot12, this.pot13]
 
 
         //creating player
@@ -83,14 +90,19 @@ class Puzzle2 extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
 
         // change this to be invisibile door at exit
-        this.door = this.physics.add.sprite(config.width - config.width, config.height / 2, 'door'); 
+        this.door = this.physics.add.sprite(config.width / 2, config.height, 'door'); 
         
         let door = this.add.existing(this.door);
        
         door.body.setCollideWorldBounds = true;
+
+        this.door.alpha = 0;
+
+        // flag for collision
+        this.colliding = false;
         
         //creating collsion detector
-        this.physics.add.overlap(player, door, this.hitDoor1, null, this);
+        this.physics.add.overlap(player, door, this.hitDoor3, null, this);
 
         // temporary to see coords of player
         this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
@@ -121,9 +133,34 @@ class Puzzle2 extends Phaser.Scene {
             player.anims.play("down");
         }
 
+        this.potArray.forEach(element => {
+            if (this.physics.overlap(player, element)) {
+                if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
+                    if (!this.colliding) {
+                        this.detectCollision(element);
+                        this.colliding = true;
+                    }
+                }
+            } else {
+                this.colliding = false;
+            }
+        });
+
     }
     //starts puzzle scene when objects collide 
     hitDoor3() {
-        this.scene.run('puzScene1');
+        this.scene.start('puzScene3');
+    }
+
+    detectCollision(item) {
+        // console.log(item.texture.key);
+        if (this.door.alpha == 0) {
+            if (item == this.pot7) {
+                this.door.alpha = 1;
+                this.sound.play('correct');
+            } else {
+                this.sound.play('wrong');
+            }
+        }
     }
 }
