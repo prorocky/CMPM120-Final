@@ -113,23 +113,11 @@ class Play extends Phaser.Scene {
             player.setVelocityY(500);
             player.anims.play("down");
         }
-
-        if (this.physics.overlap(player, this.door)) {
-            console.log('true');
-            inDoor = true;
-        } else {
-            inDoor = false;
-        }
         
     }
 
     //starts puzzle scene when objects collide 
     hitDoor1 (){
-        // player.x = 100;
-        // player.setVelocity(0, 0);
-        // this.scene.sleep() causes weird issue
-        // try changing to .stop()?
-        // this.scene.sleep();
         this.scene.start('puzScene1');
     }
 }
@@ -148,13 +136,6 @@ class Play extends Phaser.Scene {
  *          -> for now, items are scattered, play lose audio for wrong item, win audio for correct item, door appears
  *                  -> add animation for "damage" (toggle alpha 0/1)
  *          -> change to scene.pause() scene.resume() so they don't have to do the puzzle over and over
- * 
- * 
- * New Possible Changes:
- * 
- * Have a "completed riddle" version of each room so we can easily move back and forward between them without complications, we can just use scene.start
- *          -> OR figure out how to smoothly implement scene.sleep, etc.
- * 
  * 
  * 
  * 

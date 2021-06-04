@@ -50,7 +50,8 @@ class Puzzle2 extends Phaser.Scene {
         this.cameras.main.fadeIn(1000, 0, 0, 0);
 
         // play riddle
-        this.sound.play('riddle2');
+        this.riddle = this.sound.add('riddle2');
+        this.riddle.play();
 
         /*creating animations/linking them with movement 
         so that its a different animation depending on what direction its going in */
@@ -82,7 +83,7 @@ class Puzzle2 extends Phaser.Scene {
         this.pot7 = this.physics.add.sprite(900, 420, 'pot_seven');
 
         this.potArray = [this.pot1, this.pot2, this.pot3, this.pot4, this.pot5, this.pot6, this.pot7];
-        this.glow = this.add.sprite(game.config.width / 2 + 15, game.config.height / 2 + 45, 'glow_pink');
+        this.glow = this.add.sprite(game.config.width / 2 + 15, game.config.height / 2 + 46, 'glow_pink');
         this.add.sprite(550, 325, 'remains');
 
         this.colors = ['darkgreen', 'pink', 'white', 'multi', 'pinkblue', 'green', 'neongreen'];
@@ -90,10 +91,6 @@ class Puzzle2 extends Phaser.Scene {
         this.rng = Math.floor(Math.random() * this.colors.length);
 
         this.glow.setTexture('glow_' + this.colors[this.rng]);
-        // colors[Math.floor(Math.random() * frames.length)];
-
-
-
 
         //creating player
         player = this.physics.add.sprite(200, config.height - 500, "p1");
@@ -168,19 +165,17 @@ class Puzzle2 extends Phaser.Scene {
     }
 
     detectCollision(item) {
-        // console.log(item.texture.key);
         if (this.door.alpha == 0) {
             if (item == this.potArray[this.rng]) {
                 this.door.alpha = 1;
                 this.sound.play('correct');
                 this.playing = true;
+                this.riddle.stop();
             } else {
                 this.sound.play('wrong');
+                this.riddle.stop();
                 this.scene.restart();
             }
         }
     }
 }
-
-// need to edit riddle for puzzle2
-// cut off, changed potion to be color matching
