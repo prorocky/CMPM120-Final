@@ -12,19 +12,26 @@ class Puzzle2 extends Phaser.Scene {
         this.load.image('pot_two', 'assets/img/Potion_two.png');
         this.load.image('pot_three', 'assets/img/Potion_three.png');
         this.load.image('pot_four', 'assets/img/Potion_four.png');
-        this.load.image('pot_five', 'assets/img/Potion_five.png');
-        this.load.image('pot_six', 'assets/img/Potion_six.png');
-        this.load.image('pot_seven', 'assets/img/Potion_seven.png');
-        this.load.image('pot_eight', 'assets/img/Potion_eight.png');
-        this.load.image('pot_nine', 'assets/img/Potion_nine.png');
-        this.load.image('pot_ten', 'assets/img/Potion_ten.png');
-        this.load.image('pot_eleven', 'assets/img/Potion_eleven.png');
-        this.load.image('pot_twelve', 'assets/img/Potion_twelve.png');
-        this.load.image('pot_thirteen', 'assets/img/Potion_thirteen.png');
+        this.load.image('pot_five', 'assets/img/Potion_six.png');
+        this.load.image('pot_six', 'assets/img/Potion_seven.png');
+        this.load.image('pot_seven', 'assets/img/Potion_box.png');
+
+        this.load.image('glow_darkgreen', 'assets/img/pot_darkgreen.png');
+        this.load.image('glow_green', 'assets/img/pot_green.png');
+        this.load.image('glow_neongreen', 'assets/img/pot_neongreen.png');
+        this.load.image('glow_lightpink', 'assets/img/pot_lightpink.png');
+        this.load.image('glow_multi', 'assets/img/pot_multi.png');
+        this.load.image('glow_pink', 'assets/img/pot_pink.png');
+        this.load.image('glow_pinkblue', 'assets/img/pot_pinkblue.png');
+        this.load.image('glow_white', 'assets/img/pot_white.png');
+
+        this.load.image('remains', 'assets/img/prop_mushremains.png');
+
+
 
 
         // load audio
-        this.load.audio('riddle', 'assets/aud/Riddle_Scene2.wav');
+        this.load.audio('riddle2', 'assets/aud/Riddle_Scene2.wav');
         this.load.audio('correct', 'assets/aud/WinCondition.wav');
         this.load.audio('wrong', 'assets/aud/LoseCondition.wav');
     }
@@ -41,6 +48,9 @@ class Puzzle2 extends Phaser.Scene {
 
         // fade into scene
         this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+        // play riddle
+        this.sound.play('riddle2');
 
         /*creating animations/linking them with movement 
         so that its a different animation depending on what direction its going in */
@@ -63,21 +73,26 @@ class Puzzle2 extends Phaser.Scene {
         });
 
         // create potion items
-        this.pot1 = this.physics.add.sprite(240, 320, 'pot_one');
-        this.pot2 = this.physics.add.sprite(60, 280, 'pot_two');
-        this.pot3 = this.physics.add.sprite(480, 300, 'pot_three');
-        this.pot4 = this.physics.add.sprite(620, 300, 'pot_four');
-        this.pot5 = this.physics.add.sprite(900, 300, 'pot_five');
-        this.pot6 = this.physics.add.sprite(1010, 520, 'pot_six');
-        this.pot7 = this.physics.add.sprite(1010, 750, 'pot_seven');
-        this.pot8 = this.physics.add.sprite(1010, 990, 'pot_eight');
-        this.pot9 = this.physics.add.sprite(850, 990, 'pot_nine');
-        this.pot10 = this.physics.add.sprite(75, 560, 'pot_ten');
-        this.pot11 = this.physics.add.sprite(400, 990, 'pot_eleven');
-        this.pot12 = this.physics.add.sprite(150, 990, 'pot_twelve');
-        this.pot13 = this.physics.add.sprite(75, 780, 'pot_thirteen');
+        this.pot1 = this.physics.add.sprite(75, 300, 'pot_one');
+        this.pot2 = this.physics.add.sprite(150, 950, 'pot_two');
+        this.pot3 = this.physics.add.sprite(950, 950, 'pot_three');
+        this.pot4 = this.physics.add.sprite(1000, 700, 'pot_four');
+        this.pot5 = this.physics.add.sprite(250, 300, 'pot_five');
+        this.pot6 = this.physics.add.sprite(60, 750, 'pot_six');
+        this.pot7 = this.physics.add.sprite(900, 420, 'pot_seven');
 
-        this.potArray = [this.pot1, this.pot2, this.pot3, this.pot4, this.pot5, this.pot6, this.pot7, this.pot8, this.pot9, this.pot10, this.pot11, this.pot12, this.pot13]
+        this.potArray = [this.pot1, this.pot2, this.pot3, this.pot4, this.pot5, this.pot6, this.pot7];
+        this.glow = this.add.sprite(game.config.width / 2 + 15, game.config.height / 2 + 45, 'glow_pink');
+        this.add.sprite(550, 325, 'remains');
+
+        this.colors = ['darkgreen', 'pink', 'white', 'multi', 'pinkblue', 'green', 'neongreen'];
+
+        this.rng = Math.floor(Math.random() * this.colors.length);
+
+        this.glow.setTexture('glow_' + this.colors[this.rng]);
+        // colors[Math.floor(Math.random() * frames.length)];
+
+
 
 
         //creating player
@@ -149,18 +164,23 @@ class Puzzle2 extends Phaser.Scene {
     }
     //starts puzzle scene when objects collide 
     hitDoor3() {
-        this.scene.start('puzScene3');
+        // this.scene.start('puzScene3');
     }
 
     detectCollision(item) {
         // console.log(item.texture.key);
         if (this.door.alpha == 0) {
-            if (item == this.pot7) {
+            if (item == this.potArray[this.rng]) {
                 this.door.alpha = 1;
                 this.sound.play('correct');
+                this.playing = true;
             } else {
                 this.sound.play('wrong');
+                this.scene.restart();
             }
         }
     }
 }
+
+// need to edit riddle for puzzle2
+// cut off, changed potion to be color matching

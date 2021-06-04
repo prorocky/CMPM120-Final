@@ -66,6 +66,9 @@ class Puzzle1 extends Phaser.Scene {
         // flag for starting riddle
         this.started = false;
 
+        // flag for riddle being solved
+        this.solved = false;
+
         // flag for playing riddle audio
         this.playing = false;
 
@@ -167,14 +170,16 @@ class Puzzle1 extends Phaser.Scene {
     }
 
     playRiddle() {
-        this.playing = true;
-        if (!this.started) {
-            this.started = true;
+        if (!this.solved) {
+            this.playing = true;
+            if (!this.started) {
+                this.started = true;
+            }
+            this.sound.play('riddle');
+            this.time.delayedCall(7500, () => {
+                this.playing = false;
+            }, null, this);
         }
-        this.sound.play('riddle');
-        this.time.delayedCall(7500, () => {
-            this.playing = false;
-        }, null, this);
     }
 
     detectCollision(item) {
@@ -182,6 +187,7 @@ class Puzzle1 extends Phaser.Scene {
         if (this.door.alpha == 0) {
             if (item == this.skull) {
                 this.started = true;
+                this.solved = true;
                 this.door.alpha = 1;
                 this.sound.play('correct');
             } else {
