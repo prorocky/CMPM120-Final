@@ -9,7 +9,7 @@ class Puzzle3 extends Phaser.Scene {
         this.load.image('door', 'assets/img/Door01.png');
 
         this.load.image('tile', 'assets/img/square.png');
-        // this.load.image()
+        this.load.image('glow', 'assets/img/square_glow.png');
 
 
         // load audio
@@ -22,21 +22,22 @@ class Puzzle3 extends Phaser.Scene {
         // background for room
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room3').setOrigin(0, 0);
 
-        this.tile0 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile1 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile2 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile3 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile4 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile5 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile6 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile7 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile8 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile9 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile10 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile11 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile12 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile13 = this.physics.add.sprite(75, 300, 'tile');
-        this.tile15 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile0 = this.physics.add.sprite(378, 570, 'tile');
+        this.tile1 = this.physics.add.sprite(497, 570, 'tile');
+        this.tile2 = this.physics.add.sprite(616, 570, 'tile');
+        this.tile3 = this.physics.add.sprite(735, 570, 'tile');
+        this.tile4 = this.physics.add.sprite(378, 692, 'tile');
+        this.tile5 = this.physics.add.sprite(497, 692, 'tile');
+        this.tile6 = this.physics.add.sprite(616, 692, 'tile');
+        this.tile7 = this.physics.add.sprite(735, 692, 'tile');
+        this.tile8 = this.physics.add.sprite(378, 814, 'tile');
+        this.tile9 = this.physics.add.sprite(497, 814, 'tile');
+        this.tile10 = this.physics.add.sprite(616, 814, 'tile');
+        this.tile11 = this.physics.add.sprite(735, 814, 'tile');
+        this.tile12 = this.physics.add.sprite(378, 936, 'tile');
+        this.tile13 = this.physics.add.sprite(497, 936, 'tile');
+        this.tile14 = this.physics.add.sprite(616, 936, 'tile');
+        this.tile15 = this.physics.add.sprite(735, 936, 'tile');
 
         this.tilesArray = [this.tile0, this.tile1, this.tile2, this.tile3, this.tile4, this.tile5, this.tile6, this.tile7, this.tile8, this.tile9, this.tile10, this.tile11, this.tile12, this.tile13, this.tile14, this.tile15];
 
@@ -63,6 +64,17 @@ class Puzzle3 extends Phaser.Scene {
 
         this.createPath();
 
+        // print path
+        this.path.forEach(element => this.printPath(element));
+
+        this.showPath(this.path);
+
+        this.time.delayedCall((this.path.length / 2 + 1) * 1000, () => {
+            this.resetPath();
+        }, null, this);
+
+
+
 
     }
 
@@ -80,12 +92,7 @@ class Puzzle3 extends Phaser.Scene {
             currentTile = this.tiles.get(currentTile)[rng];
             // push to this.path
             this.path.push(currentTile);
-            // console.log('infinite?');
         }
-
-        // print path
-        this.path.forEach(element => this.printPath(element));
-
     }
     printPath(tile) {
         switch(tile) {
@@ -147,15 +154,31 @@ class Puzzle3 extends Phaser.Scene {
     }
 
     updateAdjacency(tile) {
-        // console.log(tile);
         if (tile != 'end') {
             for (let i = 0; i < 16; i++) {
-                // console.log(this.tiles.get());
                 let idx = this.tiles.get(this.tilesArray[i]).indexOf(tile);
                 if (idx != -1) {
                     this.tiles.get(this.tilesArray[i]).splice(idx, 1);
                 }
             }
+        }
+    }
+
+    // loop/delay taken from stackoverflow:
+    // https://stackoverflow.com/questions/15788472/display-array-elements-with-delay
+    showPath(path) {
+        let i = 0;
+        (function loop() {
+            path[i].setTexture('glow');
+            if (++i < path.length - 1) {
+                setTimeout(loop, 500);
+            }
+        })();
+    }
+
+    resetPath() {
+        for (let i = 0; i < 16; i++) {
+            this.tilesArray[i].setTexture('tile');
         }
     }
 }
