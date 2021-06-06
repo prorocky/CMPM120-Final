@@ -32,3 +32,29 @@ class Puzzle4 extends Phaser.Scene {
     create() {
         // background for room
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room2').setOrigin(0, 0);
+
+        this.tile1 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile2 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile3 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile4 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile5 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile6 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile7 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile8 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile9 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile10 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile11 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile12 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile13 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile15 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile16 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile17 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile18 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile19 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile20 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile21 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile22 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile23 = this.physics.add.sprite(75, 300, 'tile');
+        this.tile25 = this.physics.add.sprite(75, 300, 'tile');
+    }
+}
