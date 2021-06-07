@@ -8,13 +8,13 @@ let config = {
         default:"arcade",
         arcade: {
             gravity: { y: 0 },
-            debug: false
+            debug: true
         }
     },
-    scene: [Play, Puzzle1, Puzzle2, Puzzle3, Puzzle4]
+    scene: [Menu, Play, Puzzle1, Puzzle2, Puzzle3, Puzzle4, End]
 }
 
-let player, inDoor = false; 
+let player, inDoor = false, song; 
 
 // game variable
 let game = new Phaser.Game(config);
@@ -24,5 +24,5 @@ let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;
 
 // keyboard keys
-let keySPACE, keyT;
+let keySPACE, keyENTER;
 

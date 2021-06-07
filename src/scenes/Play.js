@@ -21,11 +21,11 @@ class Play extends Phaser.Scene {
         this.physics.add.sprite (config.width /2 , config.height / 2, 'main_room');
 
         //calling create walls function
-        this.createWalls();
+        this.createWalls();        
 
-        // inventory
-        keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
-        
+        // music
+        song = this.sound.add('music', {volume: 0.5, loop: true});
+        song.play();
 
         //creating player
         player = this.physics.add.sprite(config.width/2, config.height/2, "p1");
@@ -34,10 +34,7 @@ class Play extends Phaser.Scene {
         // fade into scene
         this.cameras.main.fadeIn(1000, 0, 0, 0);
 
-        // music
-        this.song = this.sound.add('music', {volume: 0.35, loop: true});
-        this.song.play();
-        // commented for now cuz I listen to music when I work :3 -Oran
+        
 
         /*creating animations/linking them with movement 
         so that its a different animation depending on what direction its going in */

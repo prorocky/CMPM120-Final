@@ -27,6 +27,10 @@ class Puzzle2 extends Phaser.Scene {
 
         this.load.image('remains', 'assets/img/prop_mushremains.png');
 
+        this.load.spritesheet('p1', 'assets/img/mushsprite.png',
+        {
+            frameWidth: 88, frameHeight: 100
+        });
 
 
 
@@ -39,9 +43,6 @@ class Puzzle2 extends Phaser.Scene {
     create() {
         // background for room
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room2').setOrigin(0, 0);
-
-        // inventory
-        keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
 
         // space bar
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -57,20 +58,20 @@ class Puzzle2 extends Phaser.Scene {
         so that its a different animation depending on what direction its going in */
         this.anims.create({
             key:"left",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
         this.anims.create({
             key:"down",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
             
         });
         this.anims.create({
             key:"right",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
         this.anims.create({
             key:"up",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
 
         // create potion items

@@ -12,6 +12,11 @@ class Puzzle4 extends Phaser.Scene {
         this.load.image('tile', 'assets/img/square.png');
         this.load.image('glow', 'assets/img/square_glow.png');
 
+        this.load.spritesheet('p1', 'assets/img/mushsprite.png',
+        {
+            frameWidth: 88, frameHeight: 100
+        });
+
 
         // load audio
 
@@ -43,20 +48,20 @@ class Puzzle4 extends Phaser.Scene {
         so that its a different animation depending on what direction its going in */
         this.anims.create({
             key:"left",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
         this.anims.create({
             key:"down",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
             
         });
         this.anims.create({
             key:"right",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
         this.anims.create({
             key:"up",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
 
         this.tile0 = this.physics.add.sprite(264, 455, 'tile');
@@ -125,8 +130,8 @@ class Puzzle4 extends Phaser.Scene {
         //making sure player doesn't go off bounds
         player.setCollideWorldBounds(true);
 
-       
-
+        // door to escape
+        this.door = this.physics.add.sprite(1100, 650, 'door');     
 
         // print path
         // this.path.forEach(element => this.printPath(element));
@@ -141,6 +146,8 @@ class Puzzle4 extends Phaser.Scene {
         }, null, this);
 
         this.steppedTiles = [];
+
+        
 
 
     }
@@ -196,6 +203,10 @@ class Puzzle4 extends Phaser.Scene {
             this.solved = true;
             this.background.setTexture('solved_room02');
             this.sound.play('correct');
+        }
+
+        if (this.physics.overlap(player, this.door)) {
+            this.hitdoor5();
         }
     }
 
@@ -327,6 +338,13 @@ class Puzzle4 extends Phaser.Scene {
     resetPath() {
         for (let i = 0; i < 25; i++) {
             this.tilesArray[i].setTexture('tile');
+        }
+    }
+
+    hitdoor5() {
+        if (this.solved) {
+            song.stop();
+            this.scene.start('endScene');
         }
     }
 }

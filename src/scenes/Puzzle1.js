@@ -16,10 +16,14 @@ class Puzzle1 extends Phaser.Scene {
         this.load.image('voodoo2', 'assets/img/VoodooDoll_2.png');
         this.load.image('arm', 'assets/img/ChickenArm.png');
         this.load.image('door', 'assets/img/Door01.png');
+        this.load.spritesheet('p1', 'assets/img/mushsprite.png',
+        {
+            frameWidth: 88, frameHeight: 100
+        });
 
 
         // load audio
-        
+        this.load.audio('music', 'assets/aud/MainBackground.wav');
         this.load.audio('riddle', 'assets/aud/Riddle_Scene1.wav');
         this.load.audio('correct', 'assets/aud/WinCondition.wav');
         this.load.audio('wrong', 'assets/aud/LoseCondition.wav');
@@ -55,9 +59,6 @@ class Puzzle1 extends Phaser.Scene {
 
         this.itemArr = [this.gem, this.cards, this.hat, this.jars, this.skull, this.doll1, this.doll2, this.arm];
 
-        // inventory
-        keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
-
         // space bar
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         
@@ -83,20 +84,20 @@ class Puzzle1 extends Phaser.Scene {
         so that its a different animation depending on what direction its going in */
         this.anims.create({
             key:"left",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
         this.anims.create({
             key:"down",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
             
         });
         this.anims.create({
             key:"right",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
         this.anims.create({
             key:"up",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
 
         //making sure player doesn't go off bounds
@@ -144,7 +145,7 @@ class Puzzle1 extends Phaser.Scene {
             player.setVelocityY(500);
             player.anims.play("down");
         }
-        
+
         this.itemArr.forEach(element => {
             if (this.physics.overlap(player, element)) {
                 if (Phaser.Input.Keyboard.JustDown(keySPACE)) {

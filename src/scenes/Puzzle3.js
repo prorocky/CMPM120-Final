@@ -55,20 +55,20 @@ class Puzzle3 extends Phaser.Scene {
         so that its a different animation depending on what direction its going in */
         this.anims.create({
             key:"left",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
         this.anims.create({
             key:"down",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
             
         });
         this.anims.create({
             key:"right",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
         this.anims.create({
             key:"up",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
 
         this.tile0 = this.physics.add.sprite(378, 570, 'tile');
@@ -170,7 +170,7 @@ class Puzzle3 extends Phaser.Scene {
                 if (this.physics.overlap(player, element)) {
                     // if tile is not already in steppedTiles
                     if (!this.steppedTiles.includes(element)) {
-                        // if element in path, correct tile
+                        // if element in path, correct tile 
                         if (this.path.includes(element)) {
                             this.steppedTiles.push(element);
                         }
