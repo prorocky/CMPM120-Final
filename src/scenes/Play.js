@@ -20,11 +20,16 @@ class Play extends Phaser.Scene {
         // background for room
         this.physics.add.sprite (config.width /2 , config.height / 2, 'main_room');
 
+        //calling create walls function
+        this.createWalls();
+
         // inventory
         keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
         
+
         //creating player
         player = this.physics.add.sprite(config.width/2, config.height/2, "p1");
+
 
         // fade into scene
         this.cameras.main.fadeIn(1000, 0, 0, 0);
@@ -66,10 +71,13 @@ class Play extends Phaser.Scene {
        
         door.body.setCollideWorldBounds = true;
         
+        //collider function for walls
+        this.physics.add.collider(player, this.walls);
+
         // creating collsion detector
         this.physics.add.overlap(player, door, this.hitDoor1, null, this);
 
-        this.scene.launch('inventoryScene');
+        //this.scene.launch('inventoryScene');
 
         let controlsConfig = {
             fontFamily: 'Midnight Minutes',
@@ -119,6 +127,14 @@ class Play extends Phaser.Scene {
     //starts puzzle scene when objects collide 
     hitDoor1 (){
         this.scene.start('puzScene1');
+    }
+
+    createWalls(){
+        //adding walls to this level 
+        this.walls = this.physics.add.staticGroup();
+        this.walls.create(600, 120).setScale(40, 9).refreshBody();
+        this.walls.setVisible(0);
+          
     }
 }
 
