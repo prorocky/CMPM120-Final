@@ -131,7 +131,8 @@ class Puzzle4 extends Phaser.Scene {
         player.setCollideWorldBounds(true);
 
         // door to escape
-        this.door = this.physics.add.sprite(1100, 650, 'door');     
+        this.door = this.physics.add.sprite(1100, 650, 'door');
+        this.door.alpha = 0;
 
         // print path
         // this.path.forEach(element => this.printPath(element));
