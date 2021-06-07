@@ -79,22 +79,22 @@ class Play extends Phaser.Scene {
 
         //this.scene.launch('inventoryScene');
 
-        let controlsConfig = {
-            fontFamily: 'Midnight Minutes',
-            fontSize: '50px',
-            //backgroundColor: '#F3B141',
-            color: '#FFFFFF',
-            align: 'right',
-            padding: {
-              top: 5,
-              bottom: 5,
-            },
+        // let controlsConfig = {
+        //     fontFamily: 'Midnight Minutes',
+        //     fontSize: '50px',
+        //     //backgroundColor: '#F3B141',
+        //     color: '#FFFFFF',
+        //     align: 'right',
+        //     padding: {
+        //       top: 5,
+        //       bottom: 5,
+        //     },
           
-        }
-          this.controls = this.add.text(300, 800, 'Use the Arrow Keys to move', controlsConfig);
+        // }
+        //   this.controls = this.add.text(300, 800, 'Use the Arrow Keys to move', controlsConfig);
 
         //temporary to see coords of player
-        this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
+        // this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
 
          // create borders for room
         //  this.topBorder = this.physics.add.rectangle(3, 3, 100, 100, 0xFFFFFF);

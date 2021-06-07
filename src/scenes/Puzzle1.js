@@ -144,15 +144,7 @@ class Puzzle1 extends Phaser.Scene {
             player.setVelocityY(500);
             player.anims.play("down");
         }
-
-        // press space to play riddle when near mirror
-        if (player.x > 400 && player.x < 600 && player.y < 400) {
-            this.input.keyboard.once('keydown-SPACE', () => {
-                if (!this.playing) {
-                    this.playRiddle();
-                }
-            })
-        }
+        
         this.itemArr.forEach(element => {
             if (this.physics.overlap(player, element)) {
                 if (Phaser.Input.Keyboard.JustDown(keySPACE)) {

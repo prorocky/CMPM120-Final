@@ -177,6 +177,7 @@ class Puzzle3 extends Phaser.Scene {
                         // else, wrong tile, restart scene
                         else {
                             this.sound.play('wrong');
+                            this.greet.stop();
                             this.scene.restart();
                         }
                         
@@ -188,6 +189,7 @@ class Puzzle3 extends Phaser.Scene {
         if (!this.solved && this.steppedTiles.length == this.path.length - 1) {
             this.solved = true;
             this.background.setTexture('solved_room');
+            this.sound.play('correct');
         }
 
 

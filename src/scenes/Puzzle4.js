@@ -183,6 +183,7 @@ class Puzzle4 extends Phaser.Scene {
                         // else, wrong tile, restart scene
                         else {
                             this.sound.play('wrong');
+                            this.gree.stop();
                             this.scene.restart();
                         }
                         
@@ -194,6 +195,7 @@ class Puzzle4 extends Phaser.Scene {
         if (!this.solved && this.steppedTiles.length == this.path.length - 1) {
             this.solved = true;
             this.background.setTexture('solved_room02');
+            this.sound.play('correct');
         }
     }
 
