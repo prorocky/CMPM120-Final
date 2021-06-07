@@ -31,7 +31,8 @@ class Puzzle1 extends Phaser.Scene {
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room1').setOrigin(0, 0);
 
         // play greeting
-        // this.sound.play('greeting');
+        this.greeting = this.sound.add('greeting', {volume: 2.0});
+        this.greeting.play();
 
         this.rid = this.sound.add('riddle');
 
@@ -43,11 +44,11 @@ class Puzzle1 extends Phaser.Scene {
         }, null, this);
 
         // add props/items to the room
-        this.gem = this.physics.add.sprite(1010, 540, 'gem');
+        this.gem = this.physics.add.sprite(130, 300, 'gem');
         this.cards = this.physics.add.sprite(250, 975, 'cards');
         this.hat = this.physics.add.sprite(350, 275, 'hat');
         this.jars = this.physics.add.sprite(1000, 350, 'jars');
-        this.skull = this.physics.add.sprite(130, 130, 'skull');
+        this.skull = this.physics.add.sprite(1010, 550, 'skull');
         this.doll1 = this.physics.add.sprite(75, 850, 'voodoo1');
         this.doll2 = this.physics.add.sprite(900, 975, 'voodoo2');
         this.arm = this.physics.add.sprite(550, 975, 'arm');
@@ -170,6 +171,7 @@ class Puzzle1 extends Phaser.Scene {
         if (this.door.alpha == 1) {
             this.scene.start('puzScene2');
             this.rid.stop();
+            this.greeting.stop();
         }
     }
 

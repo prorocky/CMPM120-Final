@@ -17,6 +17,7 @@ class Puzzle4 extends Phaser.Scene {
 
         this.load.audio('correct', 'assets/aud/WinCondition.wav');
         this.load.audio('wrong', 'assets/aud/LoseCondition.wav');
+        this.load.audio('gree', 'assets/aud/Riddle3_Final.wav');
     }
 
     create() {
@@ -28,6 +29,9 @@ class Puzzle4 extends Phaser.Scene {
 
         //creates keyboard input values
         this.cursors = this.input.keyboard.createCursorKeys();
+
+        this.gree = this.sound.add('gree', {volume: 0.5});
+        this.gree.play();
 
         // flag for solved room
         this.solved = false;
@@ -127,9 +131,11 @@ class Puzzle4 extends Phaser.Scene {
         // print path
         // this.path.forEach(element => this.printPath(element));
 
-        this.showPath(this.path);
+        this.time.delayedCall(8000, () => {
+            this.showPath(this.path);
+        }, null, this);
 
-        this.time.delayedCall((this.path.length / 2 + 3) * 1000, () => {
+        this.time.delayedCall((this.path.length / 2 + 3) * 1000 + 8000, () => {
             this.resetPath();
             this.started = true;
         }, null, this);

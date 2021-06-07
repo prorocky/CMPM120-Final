@@ -35,8 +35,8 @@ class Play extends Phaser.Scene {
         this.cameras.main.fadeIn(1000, 0, 0, 0);
 
         // music
-        this.song = this.sound.add('music', {volume: 0.5, loop: true});
-        // this.song.play();
+        this.song = this.sound.add('music', {volume: 0.35, loop: true});
+        this.song.play();
         // commented for now cuz I listen to music when I work :3 -Oran
 
         /*creating animations/linking them with movement 
@@ -97,7 +97,7 @@ class Play extends Phaser.Scene {
         this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
 
          // create borders for room
-         this.topBorder = this.physics.add.rectangle(3, 3, 100, 100, 0xFFFFFF);
+        //  this.topBorder = this.physics.add.rectangle(3, 3, 100, 100, 0xFFFFFF);
         
     }
 

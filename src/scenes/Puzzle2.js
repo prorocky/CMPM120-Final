@@ -50,7 +50,7 @@ class Puzzle2 extends Phaser.Scene {
         this.cameras.main.fadeIn(1000, 0, 0, 0);
 
         // play riddle
-        this.riddle = this.sound.add('riddle2');
+        this.riddle = this.sound.add('riddle2', {volume: 2.0});
         this.riddle.play();
 
         /*creating animations/linking them with movement 

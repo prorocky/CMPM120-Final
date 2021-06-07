@@ -22,6 +22,7 @@ class Puzzle3 extends Phaser.Scene {
 
         this.load.audio('correct', 'assets/aud/WinCondition.wav');
         this.load.audio('wrong', 'assets/aud/LoseCondition.wav');
+        this.load.audio('greet', 'assets/aud/Riddle3_Final.wav');
     }
 
     create() {
@@ -46,6 +47,9 @@ class Puzzle3 extends Phaser.Scene {
         door.alpha = 0;
        
         door.body.setCollideWorldBounds(true);
+
+        this.greet = this.sound.add('greet', {volume: 0.5});
+        this.greet.play();
 
         /*creating animations/linking them with movement 
         so that its a different animation depending on what direction its going in */
@@ -117,10 +121,11 @@ class Puzzle3 extends Phaser.Scene {
 
         // print path
         // this.path.forEach(element => this.printPath(element));
+        this.time.delayedCall(8000, () => {
+            this.showPath(this.path);
+        }, null, this);
 
-        this.showPath(this.path);
-
-        this.time.delayedCall((this.path.length / 2 + 1) * 1000, () => {
+        this.time.delayedCall((this.path.length / 2 + 1) * 1000 + 8000, () => {
             this.resetPath();
             this.started = true;
         }, null, this);
