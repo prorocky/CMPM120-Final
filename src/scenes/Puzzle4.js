@@ -22,11 +22,37 @@ class Puzzle4 extends Phaser.Scene {
         // background for room
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room4').setOrigin(0, 0);
 
+        // fade into scene
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+        //creates keyboard input values
+        this.cursors = this.input.keyboard.createCursorKeys();
+
         // flag for solved room
         this.solved = false;
 
         // flag for moving
         this.started = false;
+
+        /*creating animations/linking them with movement 
+        so that its a different animation depending on what direction its going in */
+        this.anims.create({
+            key:"left",
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+        });
+        this.anims.create({
+            key:"down",
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            
+        });
+        this.anims.create({
+            key:"right",
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+        });
+        this.anims.create({
+            key:"up",
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+        });
 
         this.tile0 = this.physics.add.sprite(264, 455, 'tile');
         this.tile1 = this.physics.add.sprite(383, 455, 'tile');
@@ -88,12 +114,19 @@ class Puzzle4 extends Phaser.Scene {
 
         this.createPath();
 
+        //creating player
+        player = this.physics.add.sprite(150, 300, "p1");
+
+        //making sure player doesn't go off bounds
+        player.setCollideWorldBounds(true);
+
+
         // print path
         // this.path.forEach(element => this.printPath(element));
 
         this.showPath(this.path);
 
-        this.time.delayedCall((this.path.length / 2 + 1) * 1000, () => {
+        this.time.delayedCall((this.path.length / 2 + 3) * 1000, () => {
             this.resetPath();
             this.started = true;
         }, null, this);

@@ -41,7 +41,7 @@ class Puzzle3 extends Phaser.Scene {
         this.solved = false;
 
         // create door to next room
-        this.door = this.physics.add.sprite(850, 175, 'door');
+        this.door = this.physics.add.sprite(850, 150, 'door');
         let door = this.add.existing(this.door);
         door.alpha = 0;
        
