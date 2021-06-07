@@ -69,12 +69,16 @@ class Puzzle3 extends Phaser.Scene {
 
         this.showPath(this.path);
 
-        this.time.delayedCall((this.path.length / 2 + 1) * 1000, () => {
-            this.resetPath();
-        }, null, this);
+        // this.time.delayedCall((this.path.length / 2 + 1) * 1000, () => {
+        //     this.resetPath();
+        // }, null, this);
 
 
 
+
+    }
+
+    update() {
 
     }
 
@@ -164,6 +168,12 @@ class Puzzle3 extends Phaser.Scene {
         }
     }
 
+    resetPath() {
+        for (let i = 0; i < 16; i++) {
+            this.tilesArray[i].setTexture('tile');
+        }
+    }
+
     // loop/delay taken from stackoverflow:
     // https://stackoverflow.com/questions/15788472/display-array-elements-with-delay
     showPath(path) {
@@ -176,9 +186,7 @@ class Puzzle3 extends Phaser.Scene {
         })();
     }
 
-    resetPath() {
-        for (let i = 0; i < 16; i++) {
-            this.tilesArray[i].setTexture('tile');
-        }
-    }
+    
 }
+
+// maybe you have to "use" the skull/potion in order to see the path
