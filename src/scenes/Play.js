@@ -19,9 +19,6 @@ class Play extends Phaser.Scene {
     create() {
         // background for room
         this.physics.add.sprite (config.width /2 , config.height / 2, 'main_room');
-
-        // inventory
-        keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
         
         //creating player
         player = this.physics.add.sprite(config.width/2, config.height/2, "p1");
@@ -69,21 +66,19 @@ class Play extends Phaser.Scene {
         // creating collsion detector
         this.physics.add.overlap(player, door, this.hitDoor1, null, this);
 
-        this.scene.launch('inventoryScene');
-
-        let controlsConfig = {
-            fontFamily: 'Midnight Minutes',
-            fontSize: '50px',
-            //backgroundColor: '#F3B141',
-            color: '#FFFFFF',
-            align: 'right',
-            padding: {
-              top: 5,
-              bottom: 5,
-            },
+        // let controlsConfig = {
+        //     fontFamily: 'Midnight Minutes',
+        //     fontSize: '50px',
+        //     //backgroundColor: '#F3B141',
+        //     color: '#FFFFFF',
+        //     align: 'right',
+        //     padding: {
+        //       top: 5,
+        //       bottom: 5,
+        //     },
           
-          }
-          this.controls = this.add.text(300, 800, 'Use the Arrow Keys to move', controlsConfig);
+        //   }
+        //   this.controls = this.add.text(300, 800, 'Use the Arrow Keys to move', controlsConfig);
 
         // temporary to see coords of player
         // this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
