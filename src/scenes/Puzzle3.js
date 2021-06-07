@@ -34,6 +34,12 @@ class Puzzle3 extends Phaser.Scene {
         //creates keyboard input values
         this.cursors = this.input.keyboard.createCursorKeys();
 
+        // flag to start/stop movement
+        this.started = false;
+
+        // flag for solved room
+        this.solved = false;
+
         /*creating animations/linking them with movement 
         so that its a different animation depending on what direction its going in */
         this.anims.create({
@@ -109,6 +115,7 @@ class Puzzle3 extends Phaser.Scene {
 
         this.time.delayedCall((this.path.length / 2 + 1) * 1000, () => {
             this.resetPath();
+            this.started = true;
         }, null, this);
 
         // array holding tiles player has stepped on
@@ -120,25 +127,55 @@ class Puzzle3 extends Phaser.Scene {
     update() {
         player.setVelocity(0,0);
         
-        if (this.cursors.left.isDown) {
-            //  Move to the left
-            player.setVelocityX(-500);
-            player.anims.play("left");
-        } else if (this.cursors.right.isDown) {
-            //  Move to the right
-            player.setVelocityX(500);
-            player.anims.play("right");
+        if (this.started) {
+            if (this.cursors.left.isDown) {
+                //  Move to the left
+                player.setVelocityX(-500);
+                player.anims.play("left");
+            } else if (this.cursors.right.isDown) {
+                //  Move to the right
+                player.setVelocityX(500);
+                player.anims.play("right");
+            }
+        
+            if (this.cursors.up.isDown) {
+                //  Move up
+                player.setVelocityY(-500);
+                player.anims.play("up");
+            } else if (this.cursors.down.isDown) {
+                //  Move down
+                player.setVelocityY(500);
+                player.anims.play("down");
+            }
         }
-    
-        if (this.cursors.up.isDown) {
-            //  Move up
-            player.setVelocityY(-500);
-            player.anims.play("up");
-        } else if (this.cursors.down.isDown) {
-            //  Move down
-            player.setVelocityY(500);
-            player.anims.play("down");
+
+        if (!this.solved) {
+            this.tilesArray.forEach(element => {
+                // if overlapping with a tile
+                if (this.physics.overlap(player, element)) {
+                    // if tile is not already in steppedTiles
+                    if (!this.steppedTiles.includes(element)) {
+                        // if element in path, correct tile
+                        if (this.path.includes(element)) {
+                            this.steppedTiles.push(element);
+                        }
+                        // else, wrong tile, restart scene
+                        else {
+                            this.sound.play('wrong');
+                            this.scene.restart();
+                        }
+                        
+                    }
+                }
+            });
         }
+
+        if (!this.solved && this.steppedTiles.length == this.path.length - 1) {
+            this.solved = true;
+            this.background.setTexture('solved_room');
+        }
+
+
     }
 
     createPath() {
