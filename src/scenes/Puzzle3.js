@@ -40,6 +40,13 @@ class Puzzle3 extends Phaser.Scene {
         // flag for solved room
         this.solved = false;
 
+        // create door to next room
+        this.door = this.physics.add.sprite(850, 175, 'door');
+        let door = this.add.existing(this.door);
+        door.alpha = 0;
+       
+        door.body.setCollideWorldBounds(true);
+
         /*creating animations/linking them with movement 
         so that its a different animation depending on what direction its going in */
         this.anims.create({
@@ -109,7 +116,7 @@ class Puzzle3 extends Phaser.Scene {
         this.createPath();
 
         // print path
-        this.path.forEach(element => this.printPath(element));
+        // this.path.forEach(element => this.printPath(element));
 
         this.showPath(this.path);
 
@@ -117,6 +124,9 @@ class Puzzle3 extends Phaser.Scene {
             this.resetPath();
             this.started = true;
         }, null, this);
+
+        //creating collsion detector
+        this.physics.add.overlap(player, this.door, this.hitDoor4, null, this);
 
         // array holding tiles player has stepped on
         this.steppedTiles = [];
@@ -280,6 +290,12 @@ class Puzzle3 extends Phaser.Scene {
                 setTimeout(loop, 500);
             }
         })();
+    }
+
+    hitDoor4() {
+        if (this.solved) {
+            this.scene.start('puzScene4');
+        }
     }
 
     

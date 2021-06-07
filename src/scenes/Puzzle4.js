@@ -22,6 +22,12 @@ class Puzzle4 extends Phaser.Scene {
         // background for room
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room4').setOrigin(0, 0);
 
+        // flag for solved room
+        this.solved = false;
+
+        // flag for moving
+        this.started = false;
+
         this.tile0 = this.physics.add.sprite(264, 455, 'tile');
         this.tile1 = this.physics.add.sprite(383, 455, 'tile');
         this.tile2 = this.physics.add.sprite(502, 455, 'tile');
@@ -83,17 +89,70 @@ class Puzzle4 extends Phaser.Scene {
         this.createPath();
 
         // print path
-        this.path.forEach(element => this.printPath(element));
+        // this.path.forEach(element => this.printPath(element));
 
         this.showPath(this.path);
 
         this.time.delayedCall((this.path.length / 2 + 1) * 1000, () => {
             this.resetPath();
+            this.started = true;
         }, null, this);
 
+        this.steppedTiles = [];
 
 
+    }
 
+    update() {
+        player.setVelocity(0,0);
+        
+        if (this.started) {
+            if (this.cursors.left.isDown) {
+                //  Move to the left
+                player.setVelocityX(-500);
+                player.anims.play("left");
+            } else if (this.cursors.right.isDown) {
+                //  Move to the right
+                player.setVelocityX(500);
+                player.anims.play("right");
+            }
+        
+            if (this.cursors.up.isDown) {
+                //  Move up
+                player.setVelocityY(-500);
+                player.anims.play("up");
+            } else if (this.cursors.down.isDown) {
+                //  Move down
+                player.setVelocityY(500);
+                player.anims.play("down");
+            }
+        }
+
+        if (!this.solved) {
+            this.tilesArray.forEach(element => {
+                // if overlapping with a tile
+                if (this.physics.overlap(player, element)) {
+                    // if tile is not already in steppedTiles
+                    if (!this.steppedTiles.includes(element)) {
+                        // if element in path, correct tile
+                        if (this.path.includes(element)) {
+                            this.steppedTiles.push(element);
+                        }
+                        // else, wrong tile, restart scene
+                        else {
+                            this.sound.play('wrong');
+                            this.scene.restart();
+                        }
+                        
+                    }
+                }
+            });
+        }
+
+        if (!this.solved && this.steppedTiles.length == this.path.length - 1) {
+            this.solved = true;
+            this.background.setTexture('solved_room');
+        }
     }
 
     createPath() {

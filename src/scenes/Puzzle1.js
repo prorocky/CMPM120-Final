@@ -15,6 +15,7 @@ class Puzzle1 extends Phaser.Scene {
         this.load.image('voodoo1', 'assets/img/VoodooDoll_1.png');
         this.load.image('voodoo2', 'assets/img/VoodooDoll_2.png');
         this.load.image('arm', 'assets/img/ChickenArm.png');
+        this.load.image('door', 'assets/img/Door01.png');
 
 
         // load audio
