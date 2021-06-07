@@ -35,6 +35,7 @@ class InventoryScene extends Phaser.Scene{
             let y =  this.margin + this.tileSize * 600;
             let inventorySlot = this.add.sprite(x, y, "inventorySlot");
             inventorySlot.setScale(this.uiScale);
+            //let item = this.inventory.getItem(index);
         }
     }
 
