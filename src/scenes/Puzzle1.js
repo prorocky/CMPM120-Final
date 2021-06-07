@@ -9,13 +9,13 @@ class Puzzle1 extends Phaser.Scene {
             // sprites for riddle objects
         this.load.image('gem', 'assets/img/Gems_Prop.png');
         this.load.image('cards', 'assets/img/Cards.png');
-        this.load.image('ghost', 'assets/img/Ghost_CandleLight_Prop.png');
         this.load.image('hat', 'assets/img/Hat_Prop.png');
         this.load.image('jars', 'assets/img/Jars.png');
         this.load.image('skull', 'assets/img/Skull.png');
         this.load.image('voodoo1', 'assets/img/VoodooDoll_1.png');
         this.load.image('voodoo2', 'assets/img/VoodooDoll_2.png');
         this.load.image('arm', 'assets/img/ChickenArm.png');
+        this.load.image('door', 'assets/img/Door01.png');
 
 
         // load audio
@@ -23,11 +23,17 @@ class Puzzle1 extends Phaser.Scene {
         this.load.audio('riddle', 'assets/aud/Riddle_Scene1.wav');
         this.load.audio('correct', 'assets/aud/WinCondition.wav');
         this.load.audio('wrong', 'assets/aud/LoseCondition.wav');
+        this.load.audio('greeting', 'assets/aud/WhoDoWeHave.wav');
     }
 
     create() {
         // background for room
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room1').setOrigin(0, 0);
+
+        // play greeting
+        // this.sound.play('greeting');
+
+        this.rid = this.sound.add('riddle');
 
         // play riddle once
         this.time.delayedCall(8000, () => {
@@ -35,6 +41,18 @@ class Puzzle1 extends Phaser.Scene {
                 this.playRiddle();
             }
         }, null, this);
+
+        // add props/items to the room
+        this.gem = this.physics.add.sprite(1010, 540, 'gem');
+        this.cards = this.physics.add.sprite(250, 975, 'cards');
+        this.hat = this.physics.add.sprite(350, 275, 'hat');
+        this.jars = this.physics.add.sprite(1000, 350, 'jars');
+        this.skull = this.physics.add.sprite(130, 130, 'skull');
+        this.doll1 = this.physics.add.sprite(75, 850, 'voodoo1');
+        this.doll2 = this.physics.add.sprite(900, 975, 'voodoo2');
+        this.arm = this.physics.add.sprite(550, 975, 'arm');
+
+        this.itemArr = [this.gem, this.cards, this.hat, this.jars, this.skull, this.doll1, this.doll2, this.arm];
 
         // inventory
         keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
@@ -48,22 +66,11 @@ class Puzzle1 extends Phaser.Scene {
         // fade into scene
         this.cameras.main.fadeIn(1000, 0, 0, 0);
 
-        // add props/items to the room
-        this.ghost = this.physics.add.sprite(775, 250, 'ghost');
-        this.gem = this.physics.add.sprite(1010, 540, 'gem');
-        this.cards = this.physics.add.sprite(250, 975, 'cards');
-        this.hat = this.physics.add.sprite(350, 275, 'hat');
-        this.jars = this.physics.add.sprite(1000, 350, 'jars');
-        this.skull = this.physics.add.sprite(130, 130, 'skull');
-        this.doll1 = this.physics.add.sprite(75, 850, 'voodoo1');
-        this.doll2 = this.physics.add.sprite(900, 975, 'voodoo2');
-        this.arm = this.physics.add.sprite(550, 975, 'arm');
-
-        this.itemArr = [this.ghost, this.gem, this.cards, this.hat, this.jars, this.skull, this.doll1, this.doll2, this.arm];
-
-
         // flag for starting riddle
         this.started = false;
+
+        // flag for riddle being solved
+        this.solved = false;
 
         // flag for playing riddle audio
         this.playing = false;
@@ -97,31 +104,25 @@ class Puzzle1 extends Phaser.Scene {
         //creates keyboard input values
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        // door back to first room
-        this.door = this.physics.add.sprite(config.width - config.width, config.height / 2, 'door');
-        let door = this.add.existing(this.door);
-
         // door to next room
-        this.door2 = this.physics.add.sprite(config.width / 2, config.height, 'door');
-        let door2 = this.add.existing(this.door2);
-        door2.alpha = 0;
+        this.door = this.physics.add.sprite(config.width / 2, config.height, 'door');
+        let door = this.add.existing(this.door);
+        door.alpha = 0;
        
         door.body.setCollideWorldBounds = true;
-        
+
         //creating collsion detector
-        this.physics.add.overlap(player, door, this.hitDoor1, null, this);
+        this.physics.add.overlap(player, door, this.hitDoor2, null, this);
 
         // temporary to see coords of player
-        this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
+        // this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
 
-        // go to next puzzle if door is visible
-        this.physics.add.overlap(player, door2, this.hitDoor2, null, this);
     }
 
     update() {
 
         player.setVelocity(0,0);
-        this.coord.text = 'X: ' + Math.floor(player.x) + ' Y: ' + Math.floor(player.y);
+        // this.coord.text = 'X: ' + Math.floor(player.x) + ' Y: ' + Math.floor(player.y);
         
         if (this.cursors.left.isDown) {
             //  Move to the left
@@ -164,35 +165,35 @@ class Puzzle1 extends Phaser.Scene {
             }
         });
     }
-    //starts puzzle scene when objects collide 
-    hitDoor1(door, player) {
-        this.scene.start('playScene');
-    }
 
     hitDoor2() {
-        if (this.door2.alpha == 1) {
+        if (this.door.alpha == 1) {
             this.scene.start('puzScene2');
+            this.rid.stop();
         }
     }
 
     playRiddle() {
-        this.playing = true;
-        if (!this.started) {
-            this.started = true;
+        if (!this.solved) {
+            this.playing = true;
+            if (!this.started) {
+                this.started = true;
+            }
+            this.rid.play();
+            this.time.delayedCall(7500, () => {
+                this.playing = false;
+            }, null, this);
         }
-        this.sound.play('riddle');
-        this.time.delayedCall(7500, () => {
-            this.playing = false;
-        }, null, this);
     }
 
     detectCollision(item) {
-        // console.log(item.texture.key);
-        if (this.door2.alpha == 0) {
+        if (this.door.alpha == 0) {
             if (item == this.skull) {
                 this.started = true;
-                this.door2.alpha = 1;
+                this.solved = true;
+                this.door.alpha = 1;
                 this.sound.play('correct');
+                this.rid.stop();
             } else {
                 this.sound.play('wrong');
             }

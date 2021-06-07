@@ -10,11 +10,10 @@ class Play extends Phaser.Scene {
 
         this.load.spritesheet('p1', 'assets/img/mushsprite.png',
         {
-            frameWidth: 121, frameHeight: 143
+            frameWidth: 88, frameHeight: 100
         });
         // load audio
         this.load.audio('music', 'assets/aud/MainBackground.wav');
-        this.load.audio('greeting', 'assets/aud/WhoDoWeHave.wav');
     }
 
     create() {
@@ -32,26 +31,26 @@ class Play extends Phaser.Scene {
 
         // music
         this.song = this.sound.add('music', {volume: 0.5, loop: true});
-        this.song.play();
+        // this.song.play();
         // commented for now cuz I listen to music when I work :3 -Oran
 
         /*creating animations/linking them with movement 
         so that its a different animation depending on what direction its going in */
         this.anims.create({
             key:"left",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
         this.anims.create({
             key:"down",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})           
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})           
         });
         this.anims.create({
             key:"right",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
         this.anims.create({
             key:"up",
-            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 5})
         });
 
         // making sure player doesn't go off bounds
@@ -86,10 +85,14 @@ class Play extends Phaser.Scene {
           }
           this.controls = this.add.text(300, 800, 'Use the Arrow Keys to move', controlsConfig);
 
+        // temporary to see coords of player
+        // this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
+
         
     }
 
     update() {
+        // this.coord.text = 'X: ' + Math.floor(player.x) + ' Y: ' + Math.floor(player.y);
         player.setVelocity(0,0);
         if (this.cursors.left.isDown) {
             // Move to the left
@@ -114,9 +117,7 @@ class Play extends Phaser.Scene {
     }
 
     //starts puzzle scene when objects collide 
-    hitDoor1 (door,player){
-        // play greeting
-        this.sound.play('greeting');
+    hitDoor1 (){
         this.scene.start('puzScene1');
     }
 }
@@ -135,6 +136,8 @@ class Play extends Phaser.Scene {
  *          -> for now, items are scattered, play lose audio for wrong item, win audio for correct item, door appears
  *                  -> add animation for "damage" (toggle alpha 0/1)
  *          -> change to scene.pause() scene.resume() so they don't have to do the puzzle over and over
+ * 
+ * 
  * 
  */
 

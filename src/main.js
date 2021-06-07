@@ -11,10 +11,10 @@ let config = {
             debug: true
         }
     },
-    scene: [Play, Puzzle1, InventoryScene, Puzzle2]
+    scene: [Play, Puzzle1, Puzzle2, Puzzle3, Puzzle4, InventoryScene]
 }
 
-let player; 
+let player, inDoor = false; 
 
 // game variable
 let game = new Phaser.Game(config);
@@ -24,6 +24,5 @@ let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;
 
 // keyboard keys
-let keyW, keyA, keyS, keyD, keySPACE, keyT;
+let keySPACE, keyT;
 
-//testing commit

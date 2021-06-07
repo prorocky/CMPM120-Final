@@ -6,7 +6,6 @@ Makkenzie: props
 Gabriella: character design
 
 # Programmers
-Oran
-Diego
+Oran: puzzles
+Diego: character movement, scene transition, inventory
 
-(Have not discussed who is doing what yet)
