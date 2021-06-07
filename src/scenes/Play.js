@@ -10,7 +10,7 @@ class Play extends Phaser.Scene {
 
         this.load.spritesheet('p1', 'assets/img/mushsprite.png',
         {
-            frameWidth: 125, frameHeight: 170
+            frameWidth: 88, frameHeight: 100
         });
         // load audio
         this.load.audio('music', 'assets/aud/MainBackground.wav');
@@ -86,7 +86,7 @@ class Play extends Phaser.Scene {
           this.controls = this.add.text(300, 800, 'Use the Arrow Keys to move', controlsConfig);
 
         // temporary to see coords of player
-        this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
+        // this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
 
         
     }

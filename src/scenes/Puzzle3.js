@@ -6,10 +6,16 @@ class Puzzle3 extends Phaser.Scene {
     preload() {
         // load images/sprites
         this.load.image('main_room3', 'assets/img/puzzle_room3.png');
+        this.load.image('solved_room', 'assets/img/puzzle_room3_solved.png');
         this.load.image('door', 'assets/img/Door01.png');
 
         this.load.image('tile', 'assets/img/square.png');
         this.load.image('glow', 'assets/img/square_glow.png');
+
+        this.load.spritesheet('p1', 'assets/img/mushsprite.png',
+        {
+            frameWidth: 88, frameHeight: 100
+        });
 
 
         // load audio
@@ -21,6 +27,32 @@ class Puzzle3 extends Phaser.Scene {
     create() {
         // background for room
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room3').setOrigin(0, 0);
+
+        // fade into scene
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+        //creates keyboard input values
+        this.cursors = this.input.keyboard.createCursorKeys();
+
+        /*creating animations/linking them with movement 
+        so that its a different animation depending on what direction its going in */
+        this.anims.create({
+            key:"left",
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+        });
+        this.anims.create({
+            key:"down",
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+            
+        });
+        this.anims.create({
+            key:"right",
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+        });
+        this.anims.create({
+            key:"up",
+            frames: this.anims.generateFrameNumbers("p1",{ start: 0, end: 1})
+        });
 
         this.tile0 = this.physics.add.sprite(378, 570, 'tile');
         this.tile1 = this.physics.add.sprite(497, 570, 'tile');
@@ -62,6 +94,12 @@ class Puzzle3 extends Phaser.Scene {
 
         ]);
 
+        //creating player
+        player = this.physics.add.sprite(150, 300, "p1");
+
+        //making sure player doesn't go off bounds
+        player.setCollideWorldBounds(true);
+
         this.createPath();
 
         // print path
@@ -69,17 +107,38 @@ class Puzzle3 extends Phaser.Scene {
 
         this.showPath(this.path);
 
-        // this.time.delayedCall((this.path.length / 2 + 1) * 1000, () => {
-        //     this.resetPath();
-        // }, null, this);
+        this.time.delayedCall((this.path.length / 2 + 1) * 1000, () => {
+            this.resetPath();
+        }, null, this);
 
-
+        // array holding tiles player has stepped on
+        this.steppedTiles = [];
 
 
     }
 
     update() {
-
+        player.setVelocity(0,0);
+        
+        if (this.cursors.left.isDown) {
+            //  Move to the left
+            player.setVelocityX(-500);
+            player.anims.play("left");
+        } else if (this.cursors.right.isDown) {
+            //  Move to the right
+            player.setVelocityX(500);
+            player.anims.play("right");
+        }
+    
+        if (this.cursors.up.isDown) {
+            //  Move up
+            player.setVelocityY(-500);
+            player.anims.play("up");
+        } else if (this.cursors.down.isDown) {
+            //  Move down
+            player.setVelocityY(500);
+            player.anims.play("down");
+        }
     }
 
     createPath() {

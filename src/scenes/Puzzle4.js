@@ -22,31 +22,31 @@ class Puzzle4 extends Phaser.Scene {
         // background for room
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room4').setOrigin(0, 0);
 
-        this.tile0 = this.physics.add.sprite(378, 570, 'tile');
-        this.tile1 = this.physics.add.sprite(497, 570, 'tile');
-        this.tile2 = this.physics.add.sprite(616, 570, 'tile');
-        this.tile3 = this.physics.add.sprite(735, 570, 'tile');
-        this.tile4 = this.physics.add.sprite(378, 692, 'tile');
-        this.tile5 = this.physics.add.sprite(497, 692, 'tile');
-        this.tile6 = this.physics.add.sprite(616, 692, 'tile');
-        this.tile7 = this.physics.add.sprite(735, 692, 'tile');
-        this.tile8 = this.physics.add.sprite(378, 814, 'tile');
-        this.tile9 = this.physics.add.sprite(497, 814, 'tile');
-        this.tile10 = this.physics.add.sprite(616, 814, 'tile');
-        this.tile11 = this.physics.add.sprite(735, 814, 'tile');
-        this.tile12 = this.physics.add.sprite(378, 936, 'tile');
-        this.tile13 = this.physics.add.sprite(497, 936, 'tile');
-        this.tile14 = this.physics.add.sprite(616, 936, 'tile');
-        this.tile15 = this.physics.add.sprite(735, 936, 'tile');
-        this.tile16 = this.physics.add.sprite(616, 814, 'tile');
-        this.tile17 = this.physics.add.sprite(735, 814, 'tile');
-        this.tile18 = this.physics.add.sprite(378, 936, 'tile');
-        this.tile19 = this.physics.add.sprite(497, 936, 'tile');
-        this.tile20 = this.physics.add.sprite(616, 814, 'tile');
-        this.tile21 = this.physics.add.sprite(735, 814, 'tile');
-        this.tile22 = this.physics.add.sprite(378, 936, 'tile');
-        this.tile23 = this.physics.add.sprite(497, 936, 'tile');
-        this.tile24 = this.physics.add.sprite(616, 936, 'tile');
+        this.tile0 = this.physics.add.sprite(264, 455, 'tile');
+        this.tile1 = this.physics.add.sprite(383, 455, 'tile');
+        this.tile2 = this.physics.add.sprite(502, 455, 'tile');
+        this.tile3 = this.physics.add.sprite(621, 455, 'tile');
+        this.tile4 = this.physics.add.sprite(740, 455, 'tile');
+        this.tile5 = this.physics.add.sprite(264, 577, 'tile');
+        this.tile6 = this.physics.add.sprite(383, 577, 'tile');
+        this.tile7 = this.physics.add.sprite(502, 577, 'tile');
+        this.tile8 = this.physics.add.sprite(621, 577, 'tile');
+        this.tile9 = this.physics.add.sprite(740, 577, 'tile');
+        this.tile10 = this.physics.add.sprite(264, 699, 'tile');
+        this.tile11 = this.physics.add.sprite(383, 699, 'tile');
+        this.tile12 = this.physics.add.sprite(502, 699, 'tile');
+        this.tile13 = this.physics.add.sprite(621, 699, 'tile');
+        this.tile14 = this.physics.add.sprite(740, 699, 'tile');
+        this.tile15 = this.physics.add.sprite(264, 821, 'tile');
+        this.tile16 = this.physics.add.sprite(383, 821, 'tile');
+        this.tile17 = this.physics.add.sprite(502, 821, 'tile');
+        this.tile18 = this.physics.add.sprite(621, 821, 'tile');
+        this.tile19 = this.physics.add.sprite(740, 821, 'tile');
+        this.tile20 = this.physics.add.sprite(264, 943, 'tile');
+        this.tile21 = this.physics.add.sprite(383, 943, 'tile');
+        this.tile22 = this.physics.add.sprite(502, 943, 'tile');
+        this.tile23 = this.physics.add.sprite(621, 943, 'tile');
+        this.tile24 = this.physics.add.sprite(740, 943, 'tile');
 
         this.tilesArray = [this.tile0, this.tile1, this.tile2, this.tile3, this.tile4, this.tile5, this.tile6, this.tile7, this.tile8, this.tile9, this.tile10, this.tile11, this.tile12, this.tile13, this.tile14, this.tile15, this.tile16, this.tile17, this.tile18, this.tile19, this.tile20, this.tile21, this.tile22, this.tile23, this.tile24];
 
@@ -210,7 +210,7 @@ class Puzzle4 extends Phaser.Scene {
     }
 
     // loop/delay taken from stackoverflow:
-    // https://stackoverflow.com/questions/15788472/display-array-elements-with-delay
+    // https://stackoverflow.com/questions/15778472/display-array-elements-with-delay
     showPath(path) {
         let i = 0;
         (function loop() {

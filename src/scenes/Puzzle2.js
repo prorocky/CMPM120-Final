@@ -117,13 +117,13 @@ class Puzzle2 extends Phaser.Scene {
         this.physics.add.overlap(player, door, this.hitDoor3, null, this);
 
         // temporary to see coords of player
-        this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
+        // this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
     }
 
     update() {
 
         player.setVelocity(0,0);
-        this.coord.text = 'X: ' + Math.floor(player.x) + ' Y: ' + Math.floor(player.y);
+        // this.coord.text = 'X: ' + Math.floor(player.x) + ' Y: ' + Math.floor(player.y);
         
         if (this.cursors.left.isDown) {
             //  Move to the left

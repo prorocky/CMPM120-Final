@@ -11,7 +11,7 @@ let config = {
             debug: true
         }
     },
-    scene: [Puzzle4, Play, Puzzle1, Puzzle2, Puzzle3, InventoryScene]
+    scene: [Puzzle3, Play, Puzzle1, Puzzle2, Puzzle4, InventoryScene]
 }
 
 let player, inDoor = false; 
@@ -26,4 +26,3 @@ let borderPadding = borderUISize / 3;
 // keyboard keys
 let keySPACE, keyT;
 
-//testing commit
