@@ -83,6 +83,8 @@ class Play extends Phaser.Scene {
         // temporary to see coords of player
         // this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
 
+         // create borders for room
+         this.topBorder = this.physics.add.rectangle(3, 3, 100, 100, 0xFFFFFF);
         
     }
 

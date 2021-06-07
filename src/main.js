@@ -11,7 +11,7 @@ let config = {
             debug: true
         }
     },
-    scene: [Play, Puzzle1, Puzzle2, Puzzle3, Puzzle4, InventoryScene]
+    scene: [Play, Puzzle1, Puzzle2, Puzzle3, Puzzle4]
 }
 
 let player, inDoor = false; 
