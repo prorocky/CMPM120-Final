@@ -120,6 +120,8 @@ class Puzzle4 extends Phaser.Scene {
         //making sure player doesn't go off bounds
         player.setCollideWorldBounds(true);
 
+       
+
 
         // print path
         // this.path.forEach(element => this.printPath(element));
