@@ -7,6 +7,7 @@ class Puzzle4 extends Phaser.Scene {
         // load images/sprites
         this.load.image('main_room4', 'assets/img/puzzle_room4.png');
         this.load.image('door', 'assets/img/Door01.png');
+        this.load.image('solved_room02', 'assets/img/puzzle_room4_solved.png');
 
         this.load.image('tile', 'assets/img/square.png');
         this.load.image('glow', 'assets/img/square_glow.png');
@@ -186,7 +187,7 @@ class Puzzle4 extends Phaser.Scene {
 
         if (!this.solved && this.steppedTiles.length == this.path.length - 1) {
             this.solved = true;
-            this.background.setTexture('solved_room');
+            this.background.setTexture('solved_room02');
         }
     }
 
