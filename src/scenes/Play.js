@@ -90,11 +90,11 @@ class Play extends Phaser.Scene {
               bottom: 5,
             },
           
-        //   }
-        //   this.controls = this.add.text(300, 800, 'Use the Arrow Keys to move', controlsConfig);
+        }
+          this.controls = this.add.text(300, 800, 'Use the Arrow Keys to move', controlsConfig);
 
-        // temporary to see coords of player
-        // this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
+        //temporary to see coords of player
+        this.coord = this.add.text(80, 80, 'X: ' + player.x + ' Y: ' + player.y);
 
         
     }
