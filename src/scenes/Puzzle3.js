@@ -151,21 +151,21 @@ class Puzzle3 extends Phaser.Scene {
         if (this.started) {
             if (this.cursors.left.isDown) {
                 //  Move to the left
-                player.setVelocityX(-500);
+                player.setVelocityX(-450);
                 player.anims.play("left");
             } else if (this.cursors.right.isDown) {
                 //  Move to the right
-                player.setVelocityX(500);
+                player.setVelocityX(450);
                 player.anims.play("right");
             }
         
             if (this.cursors.up.isDown) {
                 //  Move up
-                player.setVelocityY(-500);
+                player.setVelocityY(-450);
                 player.anims.play("up");
             } else if (this.cursors.down.isDown) {
                 //  Move down
-                player.setVelocityY(500);
+                player.setVelocityY(450);
                 player.anims.play("down");
             }
         }
