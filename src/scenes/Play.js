@@ -73,6 +73,7 @@ class Play extends Phaser.Scene {
 
         // creating collsion detector
         this.physics.add.overlap(player, door, this.hitDoor1, null, this);
+        
 
         //this.scene.launch('inventoryScene');
 

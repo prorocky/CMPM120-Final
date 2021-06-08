@@ -29,6 +29,9 @@ class Puzzle4 extends Phaser.Scene {
         // background for room
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room4').setOrigin(0, 0);
 
+        //calling create walls function
+        this.createWalls();
+
         // fade into scene
         this.cameras.main.fadeIn(1000, 0, 0, 0);
 
@@ -125,7 +128,10 @@ class Puzzle4 extends Phaser.Scene {
         this.createPath();
 
         //creating player
-        player = this.physics.add.sprite(150, 300, "p1");
+        player = this.physics.add.sprite(150, 320, "p1");
+
+        //collider function for walls
+        this.physics.add.collider(player, this.walls);
 
         //making sure player doesn't go off bounds
         player.setCollideWorldBounds(true);
@@ -347,5 +353,14 @@ class Puzzle4 extends Phaser.Scene {
             song.stop();
             this.scene.start('endScene');
         }
+    }
+    createWalls(){
+        //adding walls to this level 
+        this.walls = this.physics.add.staticGroup();
+        this.walls.create(600, 120).setScale(40, 9).refreshBody();
+        this.walls.create(904, 455).setScale(.75, 12).refreshBody();
+        this.walls.create(904, 930).setScale(.75, 10).refreshBody();
+        this.walls.setVisible(0);
+          
     }
 }

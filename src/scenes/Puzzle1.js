@@ -33,6 +33,8 @@ class Puzzle1 extends Phaser.Scene {
     create() {
         // background for room
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room1').setOrigin(0, 0);
+         //calling create walls function
+         this.createWalls();
 
         // play greeting
         this.greeting = this.sound.add('greeting', {volume: 2.0});
@@ -102,6 +104,9 @@ class Puzzle1 extends Phaser.Scene {
 
         //making sure player doesn't go off bounds
         player.setCollideWorldBounds(true);
+        
+        //collider function for walls
+        this.physics.add.collider(player, this.walls);
 
         //creates keyboard input values
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -193,5 +198,12 @@ class Puzzle1 extends Phaser.Scene {
                 this.sound.play('wrong');
             }
         }
+    }
+    createWalls(){
+        //adding walls to this level 
+        this.walls = this.physics.add.staticGroup();
+        this.walls.create(600, 120).setScale(40, 9).refreshBody();
+        this.walls.setVisible(0);
+          
     }
 }

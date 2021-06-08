@@ -29,6 +29,9 @@ class Puzzle3 extends Phaser.Scene {
         // background for room
         this.background = this.add.tileSprite(0, 0, 1080, 1080, 'main_room3').setOrigin(0, 0);
 
+        //calling create walls function
+        this.createWalls();
+
         // fade into scene
         this.cameras.main.fadeIn(1000, 0, 0, 0);
 
@@ -117,6 +120,9 @@ class Puzzle3 extends Phaser.Scene {
         //making sure player doesn't go off bounds
         player.setCollideWorldBounds(true);
 
+        //collider function for walls
+        this.physics.add.collider(player, this.walls);
+        
         this.createPath();
 
         // print path
@@ -191,7 +197,6 @@ class Puzzle3 extends Phaser.Scene {
             this.background.setTexture('solved_room');
             this.sound.play('correct');
         }
-
 
     }
 
@@ -303,6 +308,14 @@ class Puzzle3 extends Phaser.Scene {
         if (this.solved) {
             this.scene.start('puzScene4');
         }
+    }
+
+    createWalls(){
+        //adding walls to this level 
+        this.walls = this.physics.add.staticGroup();
+        this.walls.create(600, 120).setScale(40, 9).refreshBody();
+        this.walls.setVisible(0);
+          
     }
 
     
